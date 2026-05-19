@@ -1,0 +1,99 @@
+import React from "react";
+import * as motion from "motion/react-client";
+import { cn } from "@/lib/utils";
+
+const BottomHero = ({
+  title,
+  buttonTitle,
+  backgroundImage,
+  titleContainerClass,
+  link,
+}: any) => {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  return (
+    <motion.a
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={fadeInUp as any}
+      className="relative h-[633px] flex items-end md:items-center"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      href={link}
+      target="_blank"
+    >
+      {/* Black fading gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+
+      {/* Content */}
+      <div className="max-w-[90rem] mx-auto w-full px-4 md:px-8">
+      <div
+        className={cn(
+          "relative z-10 max-w-[471px] space-y-8",
+          titleContainerClass,
+        )}
+      >
+        <p
+          className="text-white font-bold  text-3xl md:text-[54px] leading-snug"
+          style={{
+            fontFamily: "Inter",
+          }}
+        >
+          {title}
+        </p>
+
+        <motion.button
+          whileHover={{
+            scale: 1.05,
+            backgroundColor: "#e6b400",
+          }}
+          whileTap={{ scale: 0.95 }}
+          className="bg-[#F2BA00] border border-[#2C2C2C] flex items-center justify-between gap-4 rounded-full px-8 py-2 hover:bg-[#cc9f53] transition-colors duration-300"
+        >
+          <span className="text-[#3C3C3C] font-medium text-base">
+            {buttonTitle}
+          </span>
+
+          <motion.svg
+            animate={{ x: [0, 5, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+          >
+            <title>arrow_right_circle_line</title>
+            <g id="arrow_right_circle_line" fill="none" fillRule="nonzero">
+              <path d="M24 0v24H0V0h24ZM12.594 23.258l-.012.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.105.074.014.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.016-.018Zm.264-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.008.201.092c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.092.01-.009.004-.011.017-.43-.003-.012-.01-.01-.184-.092Z" />
+              <path
+                fill="#3C3C3C"
+                d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm.005 3.758a1 1 0 0 1 1.32-.084l.094.084 3.535 3.535a1 1 0 0 1 .083 1.32l-.083.094-3.535 3.536a1 1 0 0 1-1.498-1.32l.084-.094 1.828-1.83H7.757a1 1 0 0 1-.116-1.992L7.757 11h6.076l-1.828-1.828a1 1 0 0 1 0-1.414Z"
+              />
+            </g>
+          </motion.svg>
+        </motion.button>
+      </div>
+      </div>
+    </motion.a>
+  );
+};
+
+export default BottomHero;
