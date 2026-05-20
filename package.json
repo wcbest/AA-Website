@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "biome check .",
+    "fix": "biome check --write --unsafe ."
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -48,6 +49,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.15",
     "@types/bcrypt": "^5.0.2",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",

@@ -1,31 +1,26 @@
 "use client";
 
-import { Heading } from "@/components/heading";
-import { Button } from "@/components/ui/button";
-import { useModal } from "@/hooks/use-modal-store";
 import axios from "axios";
-import { Plus } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { Toaster, toast } from "sonner";
-import { Separator } from "@/components/ui/separator";
-import { MoreVertical } from "lucide-react";
-import { Pencil } from "lucide-react";
-import { Trash2 } from "lucide-react";
+import { MoreVertical, Pencil, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Toaster, toast } from "sonner";
+import { AlertModal } from "@/components/alert";
+import { EditModal } from "@/components/edit";
+import EmptyState from "@/components/empty-state";
+import { Heading } from "@/components/heading";
+import ImageUpload from "@/components/image-upload";
+import Loader from "@/components/loader";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AlertModal } from "@/components/alert";
-import { EditModal } from "@/components/edit";
 import { Input } from "@/components/ui/input";
-import ImageUpload from "@/components/image-upload";
-import Loader from "@/components/loader";
-import EmptyState from "@/components/empty-state";
+import { Separator } from "@/components/ui/separator";
+import { useModal } from "@/hooks/use-modal-store";
 
 const Billboards = () => {
   const { onOpen, isOpen } = useModal();
@@ -34,7 +29,7 @@ const Billboards = () => {
   const [editLoading, setEditLoading] = useState(false);
   const [billNo, setBillNo] = useState(0);
   const [billBoards, setBillBoards] = useState<any>([]);
-  const [billBoard, setBillBoard] = useState(null);
+  const [_billBoard, setBillBoard] = useState(null);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDel, setOpenDel] = useState(false);
   const [getBillId, setGetBillId] = useState("");
@@ -91,7 +86,7 @@ const Billboards = () => {
     try {
       setEditLoading(true);
 
-      const response = await axios.patch(
+      const _response = await axios.patch(
         `/api/billboards/${id}`,
         {
           label: textInput,
@@ -101,7 +96,7 @@ const Billboards = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       toast.success("Updated Succesfully!!");
@@ -119,7 +114,7 @@ const Billboards = () => {
     try {
       setDelLoading(true);
 
-      const response = await axios.delete(`/api/billboards/${id}`, {
+      const _response = await axios.delete(`/api/billboards/${id}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -137,13 +132,13 @@ const Billboards = () => {
 
   useEffect(() => {
     getBillboards();
-  }, [editLoading, delLoading]);
+  }, [getBillboards]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <ImageUpload setFile={setFile} file={file} />
       <Input
-        className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+        className="border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
         placeholder="Enter text"
         value={textInput}
         onChange={handleInputChange}
@@ -167,21 +162,21 @@ const Billboards = () => {
         </div>
       </div>
       <Separator />
-      <div className="flex items-start justify-start p-5 w-full flex-wrap">
+      <div className="flex w-full flex-wrap items-start justify-start p-5">
         {loading && (
-          <div className="flex items-center justify-center p-5 w-full">
+          <div className="flex w-full items-center justify-center p-5">
             <Loader />
           </div>
         )}
         {!loading && billBoards.length === 0 ? (
-          <div className="flex items-center justify-center p-5 w-full">
+          <div className="flex w-full items-center justify-center p-5">
             <EmptyState title="Uh Oh" subtitle="No billboards!" />
           </div>
         ) : null}
         {!loading &&
           billBoards?.map((billboard: any, index: number) => (
-            <div className="m-4 w-[400px] h-32" key={billboard._id}>
-              <div className="flex cursor-pointer items-center justify-between rounded-xl border-2 border-transparent bg-white px-2 py-4 shadow h-full">
+            <div className="m-4 h-32 w-[400px]" key={billboard._id}>
+              <div className="flex h-full cursor-pointer items-center justify-between rounded-xl border-2 border-transparent bg-white px-2 py-4 shadow">
                 <div className="flex items-center gap-1">
                   <p>{index + 1}.</p>
                   <Image
@@ -190,18 +185,18 @@ const Billboards = () => {
                     width={100}
                     height={100}
                   />
-                  <div className="flex flex-col items-start ">
+                  <div className="flex flex-col items-start">
                     {/* <h2 className="font-medium text-neutral-700 sm:text-xl">
                     {billboard.label}
                   </h2> */}
-                    <p className="text-sm text-neutral-500  overflow-hidden truncate w-36 ">
+                    <p className="w-36 overflow-hidden truncate text-neutral-500 text-sm">
                       {billboard.label}
                     </p>
                   </div>
                 </div>
 
                 <p
-                  className="text-xl font-semibold text-neutral-900 sm:text-2xl"
+                  className="font-semibold text-neutral-900 text-xl sm:text-2xl"
                   onClick={() => {
                     setGetBillId(billboard._id);
                     getBillboard(billboard?._id);
@@ -213,14 +208,14 @@ const Billboards = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="mr-4">
                       <DropdownMenuItem
-                        className="w-full flex justify-between cursor-pointer "
+                        className="flex w-full cursor-pointer justify-between"
                         onClick={() => setOpenEdit(true)}
                       >
                         Edit
                         <Pencil size={16} />
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        className="w-full flex justify-between cursor-pointer"
+                        className="flex w-full cursor-pointer justify-between"
                         onClick={() => setOpenDel(true)}
                       >
                         Delete

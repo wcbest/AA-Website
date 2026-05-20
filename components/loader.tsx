@@ -1,5 +1,3 @@
-import React from "react";
-
 const Loader = () => {
   return (
     <div>
@@ -7,7 +5,7 @@ const Loader = () => {
       <div>
         <svg
           fill="none"
-          className=" h-20 w-20 animate-spin text-black"
+          className="h-20 w-20 animate-spin text-black"
           viewBox="0 0 32 32"
           xmlns="http://www.w3.org/2000/svg"
         >

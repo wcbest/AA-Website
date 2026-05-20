@@ -1,26 +1,13 @@
 "use client";
 
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu";
-import { cn } from "@/lib/utils";
 import axios from "axios";
-import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { toast } from "sonner";
-import { MobileToggle } from "./mobile.toggle";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const NavMenu = () => {
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [_loading, setLoading] = useState(false);
   const router = useRouter();
 
   // get all categories
@@ -48,7 +35,7 @@ const NavMenu = () => {
 
   return (
     <nav
-      className={cn("sm:flex items-center space-x-4 lg:space-x-6 hidden ")}
+      className={cn("hidden items-center space-x-4 sm:flex lg:space-x-6")}
       // {...props}
     >
       {categories.map((route: any) => (
@@ -56,10 +43,10 @@ const NavMenu = () => {
           key={route._id}
           onClick={() => router.push(`/category/${route.label}`)}
           className={cn(
-            "text-sm font-medium transition-colors hover:text-primary cursor-pointer",
+            "cursor-pointer font-medium text-sm transition-colors hover:text-primary",
             route.active
               ? "text-black dark:text-white"
-              : "text-muted-foreground"
+              : "text-muted-foreground",
           )}
         >
           {route.label}

@@ -28,12 +28,12 @@ export default function GlobalPartnerSection({
 }: GlobalPartnerSectionProps) {
   return (
     <section className="bg-white py-16" id="our-global-partner">
-      <div className="max-w-[90rem] mx-auto px-4 md:px-8">
+      <div className="mx-auto max-w-[90rem] px-4 md:px-8">
         {/* Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
           <div>
             <h2
-              className="text-4xl md:text-7xl font-bold text-[#000000] mb-8 md:mb-20"
+              className="mb-8 font-bold text-4xl text-[#000000] md:mb-20 md:text-7xl"
               style={{ fontFamily: "Inter" }}
             >
               Our Global
@@ -41,7 +41,7 @@ export default function GlobalPartnerSection({
               Partner
             </h2>
             <div className="max-w-[483px]">
-              <p className="text-[#81878A] text-sm font-normal md:text-lg leading-relaxed mb-8">
+              <p className="mb-8 font-normal text-[#81878A] text-sm leading-relaxed md:text-lg">
                 {description}
               </p>
             </div>
@@ -50,7 +50,7 @@ export default function GlobalPartnerSection({
           {/* Left: Description */}
 
           {/* Right: Logo and Stats */}
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col items-center justify-center">
             <div className="mb-8 md:mb-20">
               <Image
                 src={partnerLogo || "/placeholder.svg"}
@@ -61,18 +61,18 @@ export default function GlobalPartnerSection({
               />
             </div>
 
-            <div className="border-t-2 border-[#8FDC40B2] pt-8">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+            <div className="border-[#8FDC40B2] border-t-2 pt-8">
+              <div className="mb-8 grid grid-cols-2 gap-6 md:grid-cols-3">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-center">
                     <div
-                      className="text-2xl md:text-3xl font-bold text-[#015A1A] mb-2"
+                      className="mb-2 font-bold text-2xl text-[#015A1A] md:text-3xl"
                       style={{ fontFamily: "Inter" }}
                     >
                       {stat.number}
                     </div>
                     <div
-                      className="text-xs md:text-sm text-[#636466] font-normal leading-tight"
+                      className="font-normal text-[#636466] text-xs leading-tight md:text-sm"
                       style={{ fontFamily: "Inter" }}
                     >
                       {stat.label}
@@ -86,7 +86,7 @@ export default function GlobalPartnerSection({
 
         {/* Detail Text */}
         <div className="mt-8">
-          <p className="text-[#636466] font-normal text-sm md:text-lg leading-relaxed max-w-5xl">
+          <p className="max-w-5xl font-normal text-[#636466] text-sm leading-relaxed md:text-lg">
             {detailText}
           </p>
         </div>

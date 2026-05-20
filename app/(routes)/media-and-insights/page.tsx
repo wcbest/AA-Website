@@ -1,16 +1,16 @@
 "use client";
 
+import * as motion from "motion/react-client";
 import BottomHero from "@/components/BottomHero";
 import Breadcrumbs from "@/components/bread-crumbs";
 import ClientNavbar from "@/components/client-navbar";
 import FloatingArrow from "@/components/floating-arrow";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/HeroSection";
-import * as motion from "motion/react-client";
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen">
       <ClientNavbar />
 
       <motion.div
@@ -37,9 +37,9 @@ const AboutUs = () => {
 
       {/* Hero Section */}
       <section className="pt-10 pb-16">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8">
+        <div className="mx-auto max-w-[90rem] px-4 md:px-8">
           <div className="mx-auto">
-            <p className="text-[#1E1E1E] text-3xl font-thin leading-relaxed">
+            <p className="font-thin text-3xl text-[#1E1E1E] leading-relaxed">
               Stay informed with perspectives from African Aspirations. Our
               Media & Insights hub features articles, interviews, and
               thought-leadership pieces on business brokerage, funding trends,

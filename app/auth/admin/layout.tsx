@@ -1,11 +1,11 @@
 "use client";
 
+import Cookies from "js-cookie";
+import { redirect, usePathname } from "next/navigation";
+import { useEffect } from "react";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { useAuth } from "@/hooks/use-auth-store";
-import { redirect, usePathname } from "next/navigation";
-import Cookies from "js-cookie";
-import { useEffect } from "react";
 
 export default function DashboardLayout({
   children,

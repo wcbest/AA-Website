@@ -1,10 +1,9 @@
+import { Analytics } from "@vercel/analytics/react";
+import type { Metadata } from "next";
 import { ModalProvider } from "@/components/providers/modal-provider";
 import { ReactLenis } from "@/hooks/lenis";
 import { cn } from "@/lib/utils";
-import { Analytics } from "@vercel/analytics/react";
-import type { Metadata } from "next";
 import "./globals.css";
-import Breadcrumbs from "@/components/bread-crumbs";
 
 export const metadata: Metadata = {
   title: "African Aspirations",

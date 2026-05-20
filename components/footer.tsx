@@ -1,21 +1,20 @@
-import { Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#151515] text-white font-light w-full" id="footer">
+    <footer className="w-full bg-[#151515] font-light text-white" id="footer">
       {/* Main content */}
-      <div className="max-w-[90rem] mx-auto px-4 md:px-8 py-12 pt-[76px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 md:gap-10">
+      <div className="mx-auto grid max-w-[90rem] grid-cols-2 gap-8 px-4 py-12 pt-[76px] sm:grid-cols-3 md:grid-cols-6 md:gap-10 md:px-8">
         {/* Social */}
-        <div className="space-y-6 col-span-2 sm:col-span-3 md:col-span-2">
+        <div className="col-span-2 space-y-6 sm:col-span-3 md:col-span-2">
           <Link href={"/"} className="">
             <Image
               width={212}
               height={103}
               alt="AAlogo"
               src="/new_images/Copy of AA Slides v5 Final 1.svg"
-              className="w-20 h-20 md:h-[95px] md:w-[197px]"
+              className="h-20 w-20 md:h-[95px] md:w-[197px]"
             />
           </Link>
           <div className="space-y-2 text-[15px]">
@@ -25,7 +24,7 @@ const Footer = () => {
 
             <div className="flex items-center gap-3">
               {/* <MapPin className="w-5 h-5 text-[#cc9f53]" /> */}
-              <span className="text-white font-extralight text-[15px]">
+              <span className="font-extralight text-[15px] text-white">
                 6 Koi Street, Osu. Accra, Ghana
               </span>
             </div>
@@ -34,7 +33,7 @@ const Footer = () => {
               {/* <Phone className="w-5 h-5 text-[#cc9f53]" /> */}
               <a
                 href="tel: +233030 398 2318"
-                className="text-white text-[15px] font-extralight hover:no-underline hover:text-inherit"
+                className="font-extralight text-[15px] text-white hover:text-inherit hover:no-underline"
               >
                 030 398 2318
                 {/* +233-505-099427 | +1-973-204-5796 */}
@@ -46,7 +45,7 @@ const Footer = () => {
                 {/* <Mail className="w-5 h-5 text-[#cc9f53]" /> */}
                 <a
                   href="mailto:connect@africanaspirations.com"
-                  className="text-white hover:text-[#007426] transition text-[15px] font-extralight"
+                  className="font-extralight text-[15px] text-white transition hover:text-[#007426]"
                 >
                   connect@africanaspirations.com
                 </a>
@@ -58,10 +57,10 @@ const Footer = () => {
         <div>
           <Link
             href="/our-specialties"
-            className="relative text-[15px] font-bold hover:text-[#007426] text-white mb-4 inline-block group"
+            className="group relative mb-4 inline-block font-bold text-[15px] text-white hover:text-[#007426]"
           >
             Stakeholders
-            <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
           </Link>
           <ul className="space-y-4">
             {[
@@ -94,10 +93,10 @@ const Footer = () => {
               <li key={link.name} className="text-[15px]">
                 <Link
                   href={link?.href}
-                  className="relative text-white font-extralight hover:text-[#007426] transition-colors duration-300 text-[15px] inline-block group"
+                  className="group relative inline-block font-extralight text-[15px] text-white transition-colors duration-300 hover:text-[#007426]"
                 >
                   {link.name}
-                  <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
                 </Link>
               </li>
             ))}
@@ -106,10 +105,10 @@ const Footer = () => {
         <div>
           <Link
             href="#footer"
-            className="relative text-[15px] font-bold hover:text-[#007426] text-white mb-4 inline-block group"
+            className="group relative mb-4 inline-block font-bold text-[15px] text-white hover:text-[#007426]"
           >
             Our products
-            <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
           </Link>
           <ul className="space-y-4">
             {[
@@ -133,10 +132,10 @@ const Footer = () => {
               <li key={link.name}>
                 <a
                   href={link?.href}
-                  className="relative text-white font-extralight hover:text-[#007426] transition-colors duration-300 text-[15px] inline-block group"
+                  className="group relative inline-block font-extralight text-[15px] text-white transition-colors duration-300 hover:text-[#007426]"
                 >
                   {link.name}
-                  <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
                 </a>
               </li>
             ))}
@@ -145,10 +144,10 @@ const Footer = () => {
         <div>
           <Link
             href="#footer"
-            className="relative text-[15px] font-bold hover:text-[#007426] text-white mb-4 inline-block group"
+            className="group relative mb-4 inline-block font-bold text-[15px] text-white hover:text-[#007426]"
           >
             Other Links
-            <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
           </Link>
           <ul className="space-y-4">
             {[
@@ -163,21 +162,23 @@ const Footer = () => {
                 <a
                   target="_blank"
                   href={link?.href}
-                  className="relative text-white font-extralight hover:text-[#007426] transition-colors duration-300 text-[15px] inline-block group"
+                  className="group relative inline-block font-extralight text-[15px] text-white transition-colors duration-300 hover:text-[#007426]"
+                  rel="noopener"
                 >
                   {link.name}
-                  <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
                 </a>
               </li>
             ))}
           </ul>
         </div>
         {/* Social Icons */}
-        <div className="flex flex-col items-start gap-5 col-span-2 sm:col-span-1 md:justify-self-end">
+        <div className="col-span-2 flex flex-col items-start gap-5 sm:col-span-1 md:justify-self-end">
           <a
             target="_blank"
             href="http://linkedin.com/company/african-aspirations/"
             className="footer-svg transition"
+            rel="noopener"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -200,6 +201,7 @@ const Footer = () => {
             target="_blank"
             href="https://www.facebook.com/share/1BaJ73G9gw/?mibextid=wwXIfr"
             className="footer-svg transition"
+            rel="noopener"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -222,6 +224,7 @@ const Footer = () => {
             target="_blank"
             href="http://instagram.com/africanasp.gh/"
             className="footer-svg transition"
+            rel="noopener"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -244,6 +247,7 @@ const Footer = () => {
             target="_blank"
             href="https://x.com/AfricanAspGh"
             className="footer-svg transition"
+            rel="noopener"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -264,22 +268,22 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div className="max-w-[90rem] mx-auto px-4 md:px-8 pb-8 border-t border-white/10 pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0">
+      <div className="mx-auto flex max-w-[90rem] flex-col items-start justify-between gap-3 border-white/10 border-t px-4 pt-6 pb-8 md:flex-row md:items-center md:gap-0 md:px-8">
         <span
-          className="text-white text-[15px] font-normal"
+          className="font-normal text-[15px] text-white"
           style={{ fontFamily: "Inter" }}
         >
           Copyright © {new Date().getFullYear()}. African Aspirations.
         </span>
         <div className="flex items-center gap-6">
           <span
-            className="text-[#81878A] text-[15px] font-normal"
+            className="font-normal text-[#81878A] text-[15px]"
             style={{ fontFamily: "Inter" }}
           >
             Privacy Policy
           </span>
           <span
-            className="text-[#81878A] text-[15px] font-normal"
+            className="font-normal text-[#81878A] text-[15px]"
             style={{ fontFamily: "Inter" }}
           >
             Terms of Use

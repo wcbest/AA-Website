@@ -1,16 +1,11 @@
 "use client";
 
 import axios from "axios";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { Toaster, toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -18,15 +13,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { useModal } from "@/hooks/use-modal-store";
-import React, { useEffect, useState } from "react";
 import ImageUpload from "../image-upload";
-import { Toaster, toast } from "sonner";
-import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 export const CreateProductModal = () => {
   const { isOpen, onClose, type, data, onRender } = useModal();
@@ -56,14 +53,14 @@ export const CreateProductModal = () => {
 
   const isModalOpen = isOpen && type === "createProduct";
 
-  const router = useRouter();
+  const _router = useRouter();
 
   // create product
   const submit = async () => {
     try {
       setLoading(true);
 
-      const response = await axios.post(
+      const _response = await axios.post(
         "/api/products/",
         {
           name: nameInput,
@@ -76,7 +73,7 @@ export const CreateProductModal = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       toast.success("Product created successfully!!");
@@ -100,7 +97,7 @@ export const CreateProductModal = () => {
   };
 
   // get all categories
-  const getCategories = async () => {
+  const _getCategories = async () => {
     try {
       setLoading(true);
 
@@ -122,9 +119,9 @@ export const CreateProductModal = () => {
     <>
       <Toaster position="top-center" />
       <Dialog open={isModalOpen} onOpenChange={handleClose}>
-        <DialogContent className="bg-white text-black p-0 overflow-hidden">
-          <DialogHeader className="pt-8 px-6">
-            <DialogTitle className="text-2xl text-center font-bold">
+        <DialogContent className="overflow-hidden bg-white p-0 text-black">
+          <DialogHeader className="px-6 pt-8">
+            <DialogTitle className="text-center font-bold text-2xl">
               Create Product
             </DialogTitle>
           </DialogHeader>
@@ -135,7 +132,7 @@ export const CreateProductModal = () => {
                 handCategoryInputChange(value);
               }}
             >
-              <SelectTrigger className=" bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 mb-3">
+              <SelectTrigger className="mb-3 border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
@@ -150,20 +147,20 @@ export const CreateProductModal = () => {
             </Select>
 
             <Input
-              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 mb-3"
+              className="mb-3 border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder="Name"
               value={nameInput}
               onChange={handleNameInputChange}
             />
 
             <Input
-              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 mb-3"
+              className="mb-3 border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder="Link"
               value={linkInput}
               onChange={handleLinkInputChange}
             />
             <Textarea
-              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 mb-3"
+              className="mb-3 border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder="Description"
               value={DescInput}
               onChange={handleDescInputChange}

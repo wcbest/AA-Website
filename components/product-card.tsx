@@ -1,11 +1,9 @@
 "use client";
 
+import { ShoppingBasket } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useCallback, useMemo } from "react";
-import yourImage from "@/public/next.svg";
 import { Button } from "./ui/button";
-import { ShoppingBasket } from "lucide-react";
 
 type ProductProps = {
   name: any;
@@ -19,50 +17,30 @@ const ProductCard = ({ name, desc, imageUrl, link, _id }: ProductProps) => {
   const router = useRouter();
 
   return (
-    <div className="m-2 ">
-      <div className="col-span-1 cursor-pointer group">
+    <div className="m-2">
+      <div className="group col-span-1 cursor-pointer">
         <div
-          className="flex flex-col gap-2 w-full"
+          className="flex w-full flex-col gap-2"
           onClick={() => router.push(`/products/${_id}`)}
         >
-          <div
-            className="
-      aspect-square 
-      w-full 
-      relative 
-      overflow-hidden 
-      rounded-xl
-    "
-          >
+          <div className="relative aspect-square w-full overflow-hidden rounded-xl">
             <Image
               fill
-              className="
-        object-cover 
-        h-full 
-        w-full 
-        group-hover:scale-110 
-        transition
-      "
+              className="h-full w-full object-cover transition group-hover:scale-110"
               src={imageUrl}
               alt="Listing"
             />
-            <div
-              className="
-      absolute
-      top-3
-      right-3
-    "
-            >
+            <div className="absolute top-3 right-3">
               {/* <HeartButton
                 listingId={item.id}
                 // currentUser={currentUser}
               /> */}
             </div>
           </div>
-          <div className="font-semibold text-lg overflow-hidden truncate w-36">
+          <div className="w-36 overflow-hidden truncate font-semibold text-lg">
             {name}
           </div>
-          <div className="font-light text-neutral-500 overflow-hidden truncate w-36">
+          <div className="w-36 overflow-hidden truncate font-light text-neutral-500">
             {desc}
           </div>
           <div className="flex flex-row items-center gap-1">
@@ -71,7 +49,7 @@ const ProductCard = ({ name, desc, imageUrl, link, _id }: ProductProps) => {
             {/* <div className="font-light">night</div> */}
           </div>
         </div>
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex w-full flex-col gap-2">
           <Button onClick={() => router.push(`${link}`)}>
             <span className="mr-4">purchase</span>
             <ShoppingBasket size={16} />

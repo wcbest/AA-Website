@@ -1,13 +1,9 @@
 "use client";
 
-import {
-  ArrowBigRightDash,
-  ArrowRight,
-  ChevronRight,
-  LocateIcon,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
+
 // import { TiLocationArrow } from "react-icons/ti";
 
 interface BentoTiltProps {
@@ -53,11 +49,11 @@ export const BentoTilt = ({ children, className = "" }: BentoTiltProps) => {
 };
 
 export const BentoCard = ({ src, title, description, isComingSoon }: any) => {
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [hoverOpacity, setHoverOpacity] = useState(0);
+  const [_cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [_hoverOpacity, setHoverOpacity] = useState(0);
   const hoverButtonRef = useRef<any>(null);
 
-  const handleMouseMove = (event: any) => {
+  const _handleMouseMove = (event: any) => {
     if (!hoverButtonRef.current) return;
     const rect = hoverButtonRef.current.getBoundingClientRect();
 
@@ -67,8 +63,8 @@ export const BentoCard = ({ src, title, description, isComingSoon }: any) => {
     });
   };
 
-  const handleMouseEnter = () => setHoverOpacity(1);
-  const handleMouseLeave = () => setHoverOpacity(0);
+  const _handleMouseEnter = () => setHoverOpacity(1);
+  const _handleMouseLeave = () => setHoverOpacity(0);
 
   return (
     <div className="relative size-full hover:opacity-70">
@@ -79,12 +75,12 @@ export const BentoCard = ({ src, title, description, isComingSoon }: any) => {
         // loop
         // muted
         // autoPlay
-        className="absolute left-0 top-0 size-full object-cover object-center"
+        className="absolute top-0 left-0 size-full object-cover object-center"
         // loading="lazy"
       />
       <div className="relative z-10 flex size-full flex-col justify-between p-5 text-white">
         <div>
-          <h1 className="bento-title text-xs md:text-3xl special-font">
+          <h1 className="bento-title special-font text-xs md:text-3xl">
             {title}
           </h1>
           {description && (
@@ -94,10 +90,10 @@ export const BentoCard = ({ src, title, description, isComingSoon }: any) => {
 
         {isComingSoon && (
           <div className="flex items-center gap-1">
-            <p className="w-max flex items-center mb-5 relative ms-10 text-sm uppercase text-white after:absolute after:-bottom-1.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white cursor-pointer">
+            <p className="relative ms-10 mb-5 flex w-max cursor-pointer items-center text-sm text-white uppercase after:absolute after:-bottom-1.5 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 dark:after:bg-white">
               Expand
             </p>
-            <ChevronRight className="mb-5 z-20 text-zinc-50" size={18} />
+            <ChevronRight className="z-20 mb-5 text-zinc-50" size={18} />
           </div>
         )}
       </div>
@@ -107,17 +103,17 @@ export const BentoCard = ({ src, title, description, isComingSoon }: any) => {
 
 const Features = () => (
   <section className="bg-black pb-52">
-    <div className="max-w-[90rem] mx-auto px-4 md:px-8">
+    <div className="mx-auto max-w-[90rem] px-4 md:px-8">
       <div className="px-5 py-32">
-        <p className="font-circular-web text-lg text-blue-50">
+        <p className="font-circular-web text-blue-50 text-lg">
           Sector-Specific Expertise for Sustainable Growth
         </p>
-        <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
+        <p className="max-w-md font-circular-web text-blue-50 text-lg opacity-50">
           We specialize in delivering tailored solutions for diverse industries.
         </p>
       </div>
 
-      <BentoTilt className="border-hsla bento-tilt_1 relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
+      <BentoTilt className="bento-tilt_1 relative mb-7 h-96 w-full overflow-hidden rounded-md border-hsla md:h-[65vh]">
         <BentoCard
           src={"/images/pexels-energepic-com-27411-159888.jpg"}
           title={<> Financial Services</>}
@@ -153,7 +149,7 @@ const Features = () => (
             isComingSoon
           />
         </BentoTilt>
-        <BentoTilt className="border-hsla bento-tilt_1 relative mb-7 h-96 w-full overflow-hidden rounded-md col-span-2 md:h-[65vh]">
+        <BentoTilt className="bento-tilt_1 relative col-span-2 mb-7 h-96 w-full overflow-hidden rounded-md border-hsla md:h-[65vh]">
           <BentoCard
             src={"/images/pexels-ron-lach-9870217.jpg"}
             title={<>Supporting Services</>}

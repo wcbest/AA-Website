@@ -1,5 +1,7 @@
 "use client";
 
+import * as motion from "motion/react-client";
+import { useEffect, useState } from "react";
 import BottomHero from "@/components/BottomHero";
 import Breadcrumbs from "@/components/bread-crumbs";
 import ClientNavbar from "@/components/client-navbar";
@@ -9,10 +11,8 @@ import ConsultingCard, {
 import FloatingArrow from "@/components/floating-arrow";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/HeroSection";
-import * as motion from "motion/react-client";
-import { useEffect, useState } from "react";
 
-const businessConsultingServices = [
+const _businessConsultingServices = [
   {
     id: "management-consulting",
     title: "Management Consulting",
@@ -268,11 +268,11 @@ export default function BusinessBrokeragePage() {
       </div> */}
 
       <section className="bg-[#015A1A] py-16">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8">
+        <div className="mx-auto max-w-[90rem] px-4 md:px-8">
           {/* Header */}
           <div className="mb-12">
             <h2
-              className="text-white text-3xl md:text-4xl font-bold mb-3 "
+              className="mb-3 font-bold text-3xl text-white md:text-4xl"
               style={{
                 fontFamily: "Inter",
               }}
@@ -280,7 +280,7 @@ export default function BusinessBrokeragePage() {
               Vetted consulting expertise for all your aspirations
             </h2>
             <p
-              className="text-white/90 text-2xl md:text-lg "
+              className="text-2xl text-white/90 md:text-lg"
               style={{
                 fontFamily: "Inter",
               }}
@@ -289,7 +289,7 @@ export default function BusinessBrokeragePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {consultingCards.map((card) => (
               <ConsultingCard
                 key={card.id}
@@ -301,12 +301,12 @@ export default function BusinessBrokeragePage() {
           </div>
         </div>
       </section>
-      <section className="relative pb-16 bg-[#F5F5F5] py-24 md:h-[945px] p-4">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center">
-            <div className="lg:w-1/2 mb-10 lg:mb-0 md:pt-32">
+      <section className="relative bg-[#F5F5F5] p-4 py-24 pb-16 md:h-[945px]">
+        <div className="mx-auto max-w-[90rem] px-4 md:px-8">
+          <div className="flex flex-col items-start lg:flex-row lg:items-center">
+            <div className="mb-10 md:pt-32 lg:mb-0 lg:w-1/2">
               <p
-                className="text-[#739F46] mb-2 text-lg  sm:text-xl lg:text-2xl font-semibold leading-snug tracking-tighter max-w-xl"
+                className="mb-2 max-w-xl font-semibold text-[#739F46] text-lg leading-snug tracking-tighter sm:text-xl lg:text-2xl"
                 style={{
                   fontFamily: "Inter",
                 }}
@@ -314,7 +314,7 @@ export default function BusinessBrokeragePage() {
                 African Aspirations’ consulting arm leverages a carefully
                 curated network of expert service providers{" "}
               </p>
-              <p className="text-[#636466] text-base md:text-xl font-normal leading-snug tracking-tighter max-w-xl">
+              <p className="max-w-xl font-normal text-[#636466] text-base leading-snug tracking-tighter md:text-xl">
                 By connecting businesses to the right experts at the right time,
                 African Aspirations ensures solutions are practical,
                 implementable, and designed to create lasting impact, helping
@@ -322,11 +322,11 @@ export default function BusinessBrokeragePage() {
               </p>
             </div>
 
-            <div className="md:absolute inset-0 h-full w-full md:p-[89px]">
+            <div className="inset-0 h-full w-full md:absolute md:p-[89px]">
               <img
                 src="/new_images/bc1.png"
                 alt="Diagram showing the African Aspirations 'plug' connecting to 100+ vetted world-class solution providers for business institutionalization, including Accounting, HR, Marketing, Legal, and Franchising."
-                className="w-full h-auto object-contain max-w-none lg:max-w-full"
+                className="h-auto w-full max-w-none object-contain lg:max-w-full"
               />
             </div>
           </div>

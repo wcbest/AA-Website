@@ -1,27 +1,14 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import gsap from "gsap";
-import {
-  ArrowDown,
-  ArrowLeft,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  LayoutDashboard,
-  Menu,
-  Monitor,
-  Plane,
-  Search,
-  X,
-} from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
+import { AnimatePresence } from "motion/react";
+import * as motion from "motion/react-client";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import * as motion from "motion/react-client";
-import { AnimatePresence, type Variants } from "motion/react";
-import Image from "next/image";
-import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 // data/navigationItems.ts
 export type NavItem = {
@@ -382,7 +369,7 @@ const ClientNavbar = () => {
   const navItemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [selectedMain, setSelectedMain] = useState<any>(null);
   const [selectedSub, setSelectedSub] = useState<any>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [_isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // mobile
 
@@ -403,12 +390,12 @@ const ClientNavbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleMouseEnter = (item: any) => {
+  const _handleMouseEnter = (item: any) => {
     if (isMobile) return; // ✅ do nothing on mobile
     setOpenDropdown(item.id);
   };
 
-  const handleMouseLeave = () => {
+  const _handleMouseLeave = () => {
     if (isMobile) return; // ✅ ignore on mobile
     closeDropdown();
   };
@@ -447,10 +434,10 @@ const ClientNavbar = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [openDropdown, isMobileMenuOpen]);
+  }, [openDropdown, isMobileMenuOpen, closeDropdown]);
 
   useEffect(() => {
-    navItemRefs.current.forEach((item, index) => {
+    navItemRefs.current.forEach((item, _index) => {
       if (item) {
         const handleMouseEnter = () => {
           gsap.to(item, {
@@ -479,7 +466,7 @@ const ClientNavbar = () => {
     });
   }, []);
 
-  const toggleDropdown = (item: string) => {
+  const _toggleDropdown = (item: string) => {
     if (openDropdown === item) {
       closeDropdown();
     } else {
@@ -544,10 +531,10 @@ const ClientNavbar = () => {
     }
   };
 
-  const openNav = () => {
+  const _openNav = () => {
     setIsOpen(true);
   };
-  const openNavMobile = () => {
+  const _openNavMobile = () => {
     setIsMobileMenuOpen(true);
   };
 
@@ -558,7 +545,7 @@ const ClientNavbar = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const MobileMenu = () => (
+  const _MobileMenu = () => (
     <AnimatePresence>
       {isMobileMenuOpen && (
         <motion.div
@@ -567,7 +554,7 @@ const ClientNavbar = () => {
           animate={{ height: "100vh", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="fixed top-0 left-0 w-full bg-[#181818] text-white z-50 overflow-hidden md:hidden"
+          className="fixed top-0 left-0 z-50 w-full overflow-hidden bg-[#181818] text-white md:hidden"
         >
           {/* Header */}
           <div className="flex items-center justify-between p-4">
@@ -587,7 +574,7 @@ const ClientNavbar = () => {
               onClick={() =>
                 selectedSub ? setSelectedSub(null) : setSelectedMain(null)
               }
-              className="flex my-6 items-center gap-2 text-white w-full"
+              className="my-6 flex w-full items-center gap-2 text-white"
               style={{ margin: 45 }}
             >
               <ChevronLeft size={20} />
@@ -595,7 +582,7 @@ const ClientNavbar = () => {
           )}
 
           <div className="mr-8" style={{ marginLeft: 65 }}>
-            <h2 className="text-lg font-semibold my-3">
+            <h2 className="my-3 font-semibold text-lg">
               {selectedSub
                 ? selectedSub.title
                 : selectedMain
@@ -606,7 +593,7 @@ const ClientNavbar = () => {
 
           {/* Content */}
           <div
-            className="overflow-y-auto h-full p-4 bg-[#181818]"
+            className="h-full overflow-y-auto bg-[#181818] p-4"
             style={{ marginLeft: 45 }}
           >
             {/* Main Menu - No animation wrapper needed since container animates */}
@@ -616,7 +603,7 @@ const ClientNavbar = () => {
                   <button
                     key={item.id}
                     onClick={() => handleMainSelect(item)}
-                    className="flex w-full justify-between items-center p-4 pr-8 rounded-lg text-left text-white hover:bg-white/10 transition"
+                    className="flex w-full items-center justify-between rounded-lg p-4 pr-8 text-left text-white transition hover:bg-white/10"
                   >
                     <span>{item.title}</span>
                     {(item?.subItems?.length as any) > 0 && (
@@ -649,7 +636,7 @@ const ClientNavbar = () => {
                           closeNav();
                         }
                       }}
-                      className="flex w-full justify-between items-center p-4 pr-8 rounded-lg text-left text-white hover:bg-white/10 transition"
+                      className="flex w-full items-center justify-between rounded-lg p-4 pr-8 text-left text-white transition hover:bg-white/10"
                     >
                       <span>{sub.title}</span>
                       {sub.subItems?.length > 0 && (
@@ -676,7 +663,7 @@ const ClientNavbar = () => {
                         closeNavMobile();
                         closeNav();
                       }}
-                      className="block w-full p-4 text-left text-white hover:bg-white/10 rounded-lg"
+                      className="block w-full rounded-lg p-4 text-left text-white hover:bg-white/10"
                     >
                       {child.title}
                     </Link>
@@ -1001,24 +988,24 @@ const ClientNavbar = () => {
   // );
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white border-b border-gray-100 z-[100]">
-      <div className="max-w-[90rem] mx-auto md:h-20 flex items-center justify-between w-full">
+    <nav className="fixed top-0 left-0 z-[100] w-full border-gray-100 border-b bg-white">
+      <div className="mx-auto flex w-full max-w-[90rem] items-center justify-between md:h-20">
         <Link href={"/"} className="">
           <Image
             width={212}
             height={103}
             alt="AAlogo"
             src="/new_images/image 14.svg"
-            className="w-20 h-20 md:h-[55px] md:w-[197px] ml-2 md:-mr-5"
+            className="ml-2 h-20 w-20 md:-mr-5 md:h-[55px] md:w-[197px]"
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden items-center gap-8 lg:flex">
           {navigationItems.map((item) => (
             <div
               key={item.title}
-              className="relative group"
+              className="group relative"
               onMouseEnter={() =>
                 item.isDropdown && setActiveDropdown(item.title)
               }
@@ -1026,13 +1013,13 @@ const ClientNavbar = () => {
             >
               <Link
                 href={item?.href as string}
-                className="flex items-center gap-1 text-[15px] font-medium text-gray-700 hover:text-emerald-900 transition-colors py-7"
+                className="flex items-center gap-1 py-7 font-medium text-[15px] text-gray-700 transition-colors hover:text-emerald-900"
               >
                 {item.title}
                 {item.isDropdown && (
                   <ChevronDown
                     className={cn(
-                      "w-4 h-4 transition-transform duration-200",
+                      "h-4 w-4 transition-transform duration-200",
                       activeDropdown === item.title && "rotate-180",
                     )}
                   />
@@ -1043,10 +1030,10 @@ const ClientNavbar = () => {
               {item.isDropdown && (
                 <div
                   className={cn(
-                    "absolute left-1/2 -translate-x-1/2 top-full w-[280px] bg-white rounded-xl shadow-2xl border border-gray-50 p-5 transition-all duration-200 ease-out",
+                    "absolute top-full left-1/2 w-[280px] -translate-x-1/2 rounded-xl border border-gray-50 bg-white p-5 shadow-2xl transition-all duration-200 ease-out",
                     activeDropdown === item.title
-                      ? "opacity-100 visible translate-y-0"
-                      : "opacity-0 invisible translate-y-2",
+                      ? "visible translate-y-0 opacity-100"
+                      : "invisible translate-y-2 opacity-0",
                   )}
                 >
                   <div className="grid grid-cols-1 gap-3">
@@ -1054,12 +1041,12 @@ const ClientNavbar = () => {
                       <Link
                         key={child.title}
                         href={child.href as string}
-                        className="flex items-center gap-3 p-3 rounded-lg border border-transparent hover:border-gray-100 hover:bg-gray-50 transition-all group/item"
+                        className="group/item flex items-center gap-3 rounded-lg border border-transparent p-3 transition-all hover:border-gray-100 hover:bg-gray-50"
                       >
                         {/* <div className="p-2 bg-gray-100 rounded group-hover/item:bg-white transition-colors">
                           {child.icon}
                         </div> */}
-                        <span className="text-[13px] font-medium text-gray-600 group-hover/item:text-black">
+                        <span className="font-medium text-[13px] text-gray-600 group-hover/item:text-black">
                           {child.title}
                         </span>
                       </Link>
@@ -1075,20 +1062,21 @@ const ClientNavbar = () => {
           href="https://forms.fillout.com/t/oEtePaNuxSus"
           target="_blank"
           // variant="outline"
-          className="py-2 hidden md:flex border-2 border-[#fff] text-[#fff] hover:bg-[#026B20] hover:text-white rounded-full px-8 w-fit bg-[#026B20]"
+          className="hidden w-fit rounded-full border-2 border-[#fff] bg-[#026B20] px-8 py-2 text-[#fff] hover:bg-[#026B20] hover:text-white md:flex"
+          rel="noopener"
         >
           Contact Us
         </a>
         {/* <Menu className="" /> */}
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-gray-600"
+          className="p-2 text-gray-600 md:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
-            <X className="w-6 h-6" />
+            <X className="h-6 w-6" />
           ) : (
-            <Menu className="w-6 h-6" />
+            <Menu className="h-6 w-6" />
           )}
         </button>
       </div>
@@ -1096,7 +1084,7 @@ const ClientNavbar = () => {
       {/* Mobile Menu Sidebar/Overlay */}
       <div
         className={cn(
-          "lg:hidden fixed inset-0 top-20 bg-white z-50 px-4 flex flex-col gap-6 transition-transform duration-300 transform",
+          "fixed inset-0 top-20 z-50 flex transform flex-col gap-6 bg-white px-4 transition-transform duration-300 lg:hidden",
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
@@ -1104,18 +1092,18 @@ const ClientNavbar = () => {
           <div key={item.title} className="flex flex-col gap-4">
             <Link
               href={item.href as string}
-              className="text-xl font-semibold border-b border-gray-50 pb-2"
+              className="border-gray-50 border-b pb-2 font-semibold text-xl"
               onClick={() => !item.isDropdown && setIsMobileMenuOpen(false)}
             >
               {item.title}
             </Link>
             {item.isDropdown && (
-              <div className="pl-4 flex flex-col gap-4">
+              <div className="flex flex-col gap-4 pl-4">
                 {item.subItems?.map((child) => (
                   <Link
                     key={child.title}
                     href={child.href as string}
-                    className="text-gray-500 text-sm flex items-center gap-2"
+                    className="flex items-center gap-2 text-gray-500 text-sm"
                   >
                     {/* {child.icon}  */}
                     {child.title}
@@ -1130,7 +1118,8 @@ const ClientNavbar = () => {
           href="https://forms.fillout.com/t/oEtePaNuxSus"
           target="_blank"
           // variant="outline"
-          className="py-2 hidden md:flex border-2 border-[#fff] text-[#fff] hover:bg-[#026B20] hover:text-white rounded-full px-8 w-fit bg-[#026B20]"
+          className="hidden w-fit rounded-full border-2 border-[#fff] bg-[#026B20] px-8 py-2 text-[#fff] hover:bg-[#026B20] hover:text-white md:flex"
+          rel="noopener"
         >
           Contact Us
         </a>

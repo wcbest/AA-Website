@@ -1,7 +1,4 @@
-import { cn } from "@/lib/utils";
-import { div } from "motion/react-client";
 import Image from "next/image";
-import React from "react";
 import { Button } from "./ui/button";
 
 const HeroSection = ({ img, title }: any) => {
@@ -19,7 +16,7 @@ const HeroSection = ({ img, title }: any) => {
   const mdSizeClass = isTitleLong ? "md:text-5xl" : "md:text-7xl";
 
   // Base classes that are always applied (mobile/sm sizes)
-  const baseClasses = `block text-xl sm:text-6xl font-extrabold ${mdSizeClass}`;
+  const _baseClasses = `block text-xl sm:text-6xl font-extrabold ${mdSizeClass}`;
   return (
     <div className="w-full">
       {/* <div className="py-4 md:py-[67px] w-full flex justify-center items-center border-b border-[#CCCCCCB2] max-w-[90rem] mx-auto px-4 md:px-8">
@@ -32,17 +29,17 @@ const HeroSection = ({ img, title }: any) => {
           {title}
         </p>
       </div> */}
-      <div className="max-w-[90rem] mx-auto flex justify-center md:justify-between items-start w-full flex-wrap md:flex-nowrap md:gap-0 gap-10 px-4 md:px-8 pb-4 pt-14">
-        <div className="w-full flex flex-col md:w-[871px] gap-5">
-          <p className="text-[#000000] font-medium text-4xl md:text-[70px] md:leading-[60px] md:mb-4">
+      <div className="mx-auto flex w-full max-w-[90rem] flex-wrap items-start justify-center gap-10 px-4 pt-14 pb-4 md:flex-nowrap md:justify-between md:gap-0 md:px-8">
+        <div className="flex w-full flex-col gap-5 md:w-[871px]">
+          <p className="font-medium text-4xl text-[#000000] md:mb-4 md:text-[70px] md:leading-[60px]">
             Institutionalize your business without the overhead
           </p>
-          <p className="text-[#81878A] font-normal text-2xl md:text-[40px] mb-2">
+          <p className="mb-2 font-normal text-2xl text-[#81878A] md:text-[40px]">
             We offer a one-stop shop for strategic, operational, and technical
             support .
           </p>
           <Button
-            className="text-base font-bold rounded-full py-2 px-8 w-fit"
+            className="w-fit rounded-full px-8 py-2 font-bold text-base"
             style={{ fontFamily: "Inter" }}
           >
             Reach out to us
@@ -54,7 +51,7 @@ const HeroSection = ({ img, title }: any) => {
             height={596}
             src={img}
             alt={"AA hero"}
-            className="w-full h-full object-cover rounded-tr-[22px]"
+            className="h-full w-full rounded-tr-[22px] object-cover"
             priority
           />{" "}
         </div>

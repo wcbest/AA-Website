@@ -1,5 +1,5 @@
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -26,8 +26,8 @@ const Story = () => {
 
   return (
     <div id="about" className="z-0 min-h-screen w-screen">
-      <div className="relative mb-8 mt-36 flex flex-col items-center gap-5">
-        <h1 className="text-black  text-2xl uppercase ">
+      <div className="relative mt-36 mb-8 flex flex-col items-center gap-5">
+        <h1 className="text-2xl text-black uppercase">
           Welcome to African asprirations
         </h1>
 

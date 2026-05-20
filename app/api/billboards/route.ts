@@ -1,8 +1,8 @@
+import { NextResponse } from "next/server";
 import Billboard from "@/models/Billboards";
 import connect from "@/utils/db";
-import { NextResponse } from "next/server";
 
-export const GET = async (req: Request, res: Response) => {
+export const GET = async (_req: Request, _res: Response) => {
   try {
     await connect();
 
@@ -11,12 +11,12 @@ export const GET = async (req: Request, res: Response) => {
     return NextResponse.json(billboards, {
       status: 200,
     });
-  } catch (err) {
+  } catch (_err) {
     return new NextResponse("Server Error", { status: 500 });
   }
 };
 
-export const POST = async (req: Request, res: Response) => {
+export const POST = async (req: Request, _res: Response) => {
   await connect();
 
   const { label, imageUrl } = await req.json();

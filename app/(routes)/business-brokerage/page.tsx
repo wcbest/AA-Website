@@ -1,16 +1,16 @@
 "use client";
 
+import * as motion from "motion/react-client";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import BottomCTASection from "@/components/bottom-cta-section";
 import Breadcrumbs from "@/components/bread-crumbs";
 import ClientNavbar from "@/components/client-navbar";
 import FloatingArrow from "@/components/floating-arrow";
 import Footer from "@/components/footer";
 import PuzzleHeroSection from "@/components/PuzzleHeroSection";
-import * as motion from "motion/react-client";
-import Image from "next/image";
-import { useEffect, useState } from "react";
 
-const businessBrokerageServices = [
+const _businessBrokerageServices = [
   {
     id: "african-business-sellers",
     title: "African Business Sellers",
@@ -152,7 +152,7 @@ export default function BusinessBrokeragePage() {
     },
   };
 
-  const itemVariants = {
+  const _itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -200,13 +200,13 @@ export default function BusinessBrokeragePage() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={containerVariants}
-        className="bg-gradient-to-r from-[#000000] via-[#000] to-[#739F46] relative w-full h-[580px] overflow-hidden"
+        className="relative h-[580px] w-full overflow-hidden bg-gradient-to-r from-[#000000] via-[#000] to-[#739F46]"
       >
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8 h-full grid grid-cols-1 md:grid-cols-2">
+        <div className="mx-auto grid h-full max-w-[90rem] grid-cols-1 px-4 md:grid-cols-2 md:px-8">
           {/* Left Section with Curved Edge */}
           <motion.div
             variants={slideInLeft as any}
-            className="relative flex items-center h-full justify-center"
+            className="relative flex h-full items-center justify-center"
           >
             <motion.img
               initial={{ opacity: 0, scale: 0.9 }}
@@ -222,16 +222,16 @@ export default function BusinessBrokeragePage() {
           {/* Right Section */}
           <motion.div
             variants={slideInRight as any}
-            className="flex flex-col justify-center text-white max-w-[580px]"
+            className="flex max-w-[580px] flex-col justify-center text-white"
           >
             <h2
-              className="text-xl md:text-[30px]  font-bold leading-snug"
+              className="font-bold text-xl leading-snug md:text-[30px]"
               style={{
                 fontFamily: "Inter",
               }}
             >
               We are building a{" "}
-              <span className="text-[#8FDC40B2] font-medium">
+              <span className="font-medium text-[#8FDC40B2]">
                 Pan-African marketplace{" "}
               </span>
               for businesses, connected to the rest of the world{" "}
@@ -245,7 +245,7 @@ export default function BusinessBrokeragePage() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-[#FFFFFF] text-base md:text-[24px] font-light mt-4 leading-relaxed"
+              className="mt-4 font-light text-[#FFFFFF] text-base leading-relaxed md:text-[24px]"
             >
               African Aspirations helps you understand your company’s true
               value, connect with serious investors, and navigate the process
@@ -255,10 +255,10 @@ export default function BusinessBrokeragePage() {
           </motion.div>
         </div>
       </motion.div>
-      <div className="bg-[#F1FBE6] py-7 md:py-24 w-full">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8 flex flex-col justify-center items-center">
+      <div className="w-full bg-[#F1FBE6] py-7 md:py-24">
+        <div className="mx-auto flex max-w-[90rem] flex-col items-center justify-center px-4 md:px-8">
           <h1
-            className="text-[#000000] text-center text-xl md:text-[40px]"
+            className="text-center text-[#000000] text-xl md:text-[40px]"
             style={{
               fontFamily: "Inter",
             }}
@@ -277,17 +277,17 @@ export default function BusinessBrokeragePage() {
         </div>
       </div>
 
-      <section className="py-16 bg-white">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8">
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-[90rem] px-4 md:px-8">
           <div className="space-y-12">
             {services.map((service, index) => (
               <div key={index}>
                 <h3
-                  className="text-2xl md:text-6xl font-semibold text-[#739F46] mb-8 md:mb-14  w-full"
+                  className="mb-8 w-full font-semibold text-2xl text-[#739F46] md:mb-14 md:text-6xl"
                   style={{ fontFamily: "Inter" }}
                 >
                   <span
-                    className="text-[#739F46] font-semibold text-2xl md:text-6xl "
+                    className="font-semibold text-2xl text-[#739F46] md:text-6xl"
                     style={{ fontFamily: "Inter" }}
                   >
                     {index + 1}.
@@ -295,18 +295,18 @@ export default function BusinessBrokeragePage() {
                   {service.title}
                 </h3>
                 {/* Left Side - Image */}
-                <div className="flex flex-col md:gap-20 lg:flex-row items-stretch bg-white  overflow-hidden transition-all duration-300 hover:translate-y-[-2px]">
-                  <div className="relative lg:w-2/5 h-56">
+                <div className="flex flex-col items-stretch overflow-hidden bg-white transition-all duration-300 hover:translate-y-[-2px] md:gap-20 lg:flex-row">
+                  <div className="relative h-56 lg:w-2/5">
                     <Image
                       src={service.image || "/placeholder.svg"}
                       alt={service.title}
                       fill
-                      className="object-cover h-full rounded-3xl"
+                      className="h-full rounded-3xl object-cover"
                     />
                   </div>
 
                   {/* Right Side - Content */}
-                  <div className="flex-1 px-8 lg:px-10 flex flex-col justify-center">
+                  <div className="flex flex-1 flex-col justify-center px-8 lg:px-10">
                     <div className="space-y-4">
                       {service.items.map((item, itemIndex) => (
                         <div key={itemIndex} className="flex items-start">
@@ -329,7 +329,7 @@ export default function BusinessBrokeragePage() {
                           </div>
 
                           <span
-                            className="text-[#000000] text-lg ml-4  leading-relaxed"
+                            className="ml-4 text-[#000000] text-lg leading-relaxed"
                             style={{ fontFamily: "Inter" }}
                           >
                             {item}
@@ -344,30 +344,33 @@ export default function BusinessBrokeragePage() {
           </div>
         </div>
       </section>
-      <section className="py-16 bg-[#015A1A]" id="pitch-books">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8" id="business-valuation">
-          <div className="max-w-4xl mx-auto">
+      <section className="bg-[#015A1A] py-16" id="pitch-books">
+        <div
+          className="mx-auto max-w-[90rem] px-4 md:px-8"
+          id="business-valuation"
+        >
+          <div className="mx-auto max-w-4xl">
             {/* Accordion */}
             <div className="space-y-4">
               {reports.map((service, index) => (
                 <div
                   key={index}
-                  className="border-b overflow-hidden transition-all duration-300"
+                  className="overflow-hidden border-b transition-all duration-300"
                 >
                   {/* Accordion Header */}
                   <button
                     onClick={() => toggleItem(index)}
-                    className="w-full py-4 text-left flex items-center transition-all duration-300 hover:text-[#C4FFDA]"
+                    className="flex w-full items-center py-4 text-left transition-all duration-300 hover:text-[#C4FFDA]"
                   >
                     <h3
-                      className="text-xl font-bold text-[#FFFFFF] "
+                      className="font-bold text-[#FFFFFF] text-xl"
                       style={{
                         fontFamily: "Inter",
                       }}
                     >
                       {service.title}
                     </h3>
-                    <div className="flex-shrink-0 ml-4">
+                    <div className="ml-4 flex-shrink-0">
                       {openItem === index ? (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -409,22 +412,22 @@ export default function BusinessBrokeragePage() {
                   </button>
 
                   <div
-                    className={`transition-all duration-500 ease-in-out overflow-hidden bg-white flex flex-col md:flex-row items-center px-4 ${
+                    className={`flex flex-col items-center overflow-hidden bg-white px-4 transition-all duration-500 ease-in-out md:flex-row ${
                       openItem === index
                         ? "max-h-[2000px] opacity-100"
                         : "max-h-0 opacity-0"
                     }`}
                   >
-                    <div className="h-full w-full md:w-[999px] ">
+                    <div className="h-full w-full md:w-[999px]">
                       <img
                         src={service?.image}
                         alt="Diagram showing the African Aspirations 'plug' connecting to 100+ vetted world-class solution providers for business institutionalization, including Accounting, HR, Marketing, Legal, and Franchising."
-                        className="w-full h-full object-contain"
+                        className="h-full w-full object-contain"
                       />
                     </div>
                     <div className="p-6">
                       <p
-                        className="text-[#739F46] font-light text-base md:text-4xl mb-4 leading-relaxed "
+                        className="mb-4 font-light text-[#739F46] text-base leading-relaxed md:text-4xl"
                         style={{
                           fontFamily: "Inter",
                         }}
@@ -435,7 +438,7 @@ export default function BusinessBrokeragePage() {
                       {/* Content */}
                       <div className="space-y-2">
                         <div className="flex items-center">
-                          <span className="text-[#81878A]  text-sm">
+                          <span className="text-[#81878A] text-sm">
                             {service.content}
                           </span>
                         </div>

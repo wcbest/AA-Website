@@ -6,7 +6,7 @@ import { data } from "../data/carousel";
 
 const Billboard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [_isTransitioning, setIsTransitioning] = useState(false);
 
   const prevSlide = () => {
     const imageCount = data?.length || 0;
@@ -36,9 +36,9 @@ const Billboard = () => {
     }, 5000); // Change every 5s
 
     return () => clearTimeout(timeout); // Clear previous timeout
-  }, [currentIndex, data?.length]);
+  }, [nextSlide]);
 
-  const goToSlide = (slideIndex: any) => {
+  const _goToSlide = (slideIndex: any) => {
     const imageCount = data?.length || 0;
     if (imageCount === 0) return;
 
@@ -46,13 +46,13 @@ const Billboard = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-[633px] w-full  group rounded-full">
+    <div className="group relative flex h-[633px] w-full items-center justify-center rounded-full">
       {data?.map((slide: any, index: any) => (
         <img
           key={index}
           src={slide.url || "/images/photo1666102737.jpeg"}
           alt={slide.alt || "African Aspirations"}
-          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 rounded-[40px] ${
+          className={`absolute top-0 left-0 h-full w-full rounded-[40px] object-cover transition-opacity duration-500 ${
             index === currentIndex ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -79,19 +79,11 @@ const Billboard = () => {
       </div> */}
 
       {/* Navigation Arrows */}
-      <div
-        className="hidden group-hover:flex items-center justify-center absolute top-1/2 left-5 
-  -translate-y-1/2 text-2xl rounded-full p-3 bg-black/30 hover:bg-black/50 
-  text-white cursor-pointer z-10 transition"
-      >
+      <div className="absolute top-1/2 left-5 z-10 hidden -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/30 p-3 text-2xl text-white transition hover:bg-black/50 group-hover:flex">
         <ArrowLeft onClick={prevSlide} size={28} />
       </div>
 
-      <div
-        className="hidden group-hover:flex items-center justify-center absolute top-1/2 right-5 
-  -translate-y-1/2 text-2xl rounded-full p-3 bg-black/30 hover:bg-black/50 
-  text-white cursor-pointer z-10 transition"
-      >
+      <div className="absolute top-1/2 right-5 z-10 hidden -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/30 p-3 text-2xl text-white transition hover:bg-black/50 group-hover:flex">
         <ArrowRight onClick={nextSlide} size={28} />
       </div>
       {/* Gold gradient bar */}

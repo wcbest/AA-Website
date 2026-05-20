@@ -1,15 +1,15 @@
 "use client";
 
-import Billboard from "@/components/billboard";
-import BottomHero from "@/components/BottomHero";
-import ClientNavbar from "@/components/client-navbar";
-import FloatingArrow from "@/components/floating-arrow";
-import Footer from "@/components/footer";
-import { Button } from "@/components/ui/button";
 import * as motion from "motion/react-client";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import BottomHero from "@/components/BottomHero";
+import Billboard from "@/components/billboard";
+import ClientNavbar from "@/components/client-navbar";
+import FloatingArrow from "@/components/floating-arrow";
+import Footer from "@/components/footer";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const highlightPercentages = (text: string) => {
@@ -96,11 +96,11 @@ export default function Home() {
       <ClientNavbar />
 
       {/* Hero Section */}
-      <div className="max-w-[90rem] mx-auto w-full flex items-start flex-wrap md:flex-nowrap px-4 md:px-8 gap-10 pt-[100px] md:pt-[200px]">
+      <div className="mx-auto flex w-full max-w-[90rem] flex-wrap items-start gap-10 px-4 pt-[100px] md:flex-nowrap md:px-8 md:pt-[200px]">
         {/* Left: text */}
-        <div className="flex flex-col gap-8 w-full md:w-1/2">
+        <div className="flex w-full flex-col gap-8 md:w-1/2">
           <h1
-            className="font-bold text-3xl md:text-[70px] text-black leading-tight "
+            className="font-bold text-3xl text-black leading-tight md:text-[70px]"
             style={{ fontFamily: "Inter" }}
           >
             <span className="block">Realising the Global</span>
@@ -110,7 +110,7 @@ export default function Home() {
           </h1>
 
           <span
-            className="text-black text-xl md:text-2xl font-normal"
+            className="font-normal text-black text-xl md:text-2xl"
             style={{ fontFamily: "Inter" }}
           >
             Whether you're building, scaling, or preparing to exit, we empower
@@ -119,7 +119,7 @@ export default function Home() {
 
           <Button
             onClick={() => router.push("/about")}
-            className="border-2 border-[#015A1A] text-base font-bold text-black hover:bg-white bg-white rounded-full py-2 px-8 w-fit"
+            className="w-fit rounded-full border-2 border-[#015A1A] bg-white px-8 py-2 font-bold text-base text-black hover:bg-white"
             style={{ fontFamily: "Inter" }}
           >
             Learn more
@@ -143,11 +143,11 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
         variants={containerVariants}
-        className="relative max-w-[90rem] mx-auto px-4 md:px-8 flex flex-wrap md:flex-nowrap items-center gap-6 md:gap-[68px] mt-[125px] md:mt-0"
+        className="relative mx-auto mt-[125px] flex max-w-[90rem] flex-wrap items-center gap-6 px-4 md:mt-0 md:flex-nowrap md:gap-[68px] md:px-8"
       >
         <motion.div
           variants={scaleUp as any}
-          className="w-full md:max-w-[1100px] md:h-[548px]"
+          className="w-full md:h-[548px] md:max-w-[1100px]"
         >
           <Image
             src={"/new_images/The-Republic-Cover-Landscape-Image-Card-5 1.svg"}
@@ -158,11 +158,11 @@ export default function Home() {
           />
         </motion.div>
 
-        <div className="md:absolute px-4 md:px-8 md:top-5 left-0 right-0 w-full flex justify-between flex-wrap md:flex-nowrap items-start">
-          <div className="absolute z-10 top-0 md:left-8 left-4 h-[4px] w-[286px] bg-gradient-to-r from-[#739F46] to-[#739F46] mt-2 rounded-r-full"></div>
+        <div className="right-0 left-0 flex w-full flex-wrap items-start justify-between px-4 md:absolute md:top-5 md:flex-nowrap md:px-8">
+          <div className="absolute top-0 left-4 z-10 mt-2 h-[4px] w-[286px] rounded-r-full bg-gradient-to-r from-[#739F46] to-[#739F46] md:left-8"></div>
 
           <p
-            className="text-[#000000] text-[50px] font-bold  mb-2 pt-5"
+            className="mb-2 pt-5 font-bold text-[#000000] text-[50px]"
             style={{
               fontFamily: "Inter",
             }}
@@ -208,7 +208,7 @@ export default function Home() {
 
                 <div className="mb-4 w-full">
                   <p
-                    className="text-[#000000] text-base font-medium mb-4 pb-4 leading-relaxed  border-b border-[#CCCCCC]"
+                    className="mb-4 border-[#CCCCCC] border-b pb-4 font-medium text-[#000000] text-base leading-relaxed"
                     style={{ fontFamily: "Inter" }}
                     dangerouslySetInnerHTML={{
                       __html: highlightPercentages(item.text),
@@ -220,8 +220,8 @@ export default function Home() {
           </div>
         </div>
       </motion.div>
-      <div className="bg-[#F1FBE6] mt-20 md:-mt-20  md:py-20">
-        <div className="gap-2 md:gap-[68px] bg-[#F1FBE6]">
+      <div className="mt-20 bg-[#F1FBE6] md:-mt-20 md:py-20">
+        <div className="gap-2 bg-[#F1FBE6] md:gap-[68px]">
           {/* <div className="w-full -mb-32 hidden md:flex">
           <Image
             src={"/new_images/Meliuk-liuk.svg"}
@@ -237,11 +237,11 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp as any}
-            className="max-w-[90rem] mx-auto px-4 md:px-8 mb-4"
+            className="mx-auto mb-4 max-w-[90rem] px-4 md:px-8"
           >
             <div>
               <p
-                className="text-[#000000] text-[50px] font-bold"
+                className="font-bold text-[#000000] text-[50px]"
                 style={{
                   fontFamily: "Inter",
                 }}
@@ -251,7 +251,7 @@ export default function Home() {
             </div>
             <div className="mt-1">
               <p
-                className=" text-black Inter-font text-3xl md:text-[32px] font-normal"
+                className="Inter-font font-normal text-3xl text-black md:text-[32px]"
                 style={{
                   fontFamily: "Inter",
                 }}
@@ -267,7 +267,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={containerVariants}
-          className="w-full max-w-[90rem] mx-auto flex justify-center items-baseline flex-wrap sm:flex-nowrap px-4 md:px-8 gap-14"
+          className="mx-auto flex w-full max-w-[90rem] flex-wrap items-baseline justify-center gap-14 px-4 sm:flex-nowrap md:px-8"
         >
           {[
             {
@@ -306,18 +306,18 @@ export default function Home() {
                 className="w-96"
               >
                 <Link href={item.link} className="max-w-[384px]">
-                  <div className="rounded-e-[84px] mb-9">
+                  <div className="mb-9 rounded-e-[84px]">
                     <Image
                       src={item.img}
                       width={235}
                       height={235}
                       alt="AA globe"
-                      className="rounded-ss-[84px] rounded-ee-[84px] w-full h-full"
+                      className="h-full w-full rounded-ss-[84px] rounded-ee-[84px]"
                     />
                   </div>
-                  <p className="text-[#1E1E1E]  font-bold text-[34px] mb-[14px]">
+                  <p className="mb-[14px] font-bold text-[#1E1E1E] text-[34px]">
                     <span
-                      className="text-[#1E1E1E] "
+                      className="text-[#1E1E1E]"
                       style={{
                         fontFamily: "Inter",
                       }}
@@ -325,7 +325,7 @@ export default function Home() {
                       {firstWord}
                     </span>{" "}
                     <span
-                      className="text-[#A6A6A6] "
+                      className="text-[#A6A6A6]"
                       style={{
                         fontFamily: "Inter",
                       }}
@@ -333,7 +333,7 @@ export default function Home() {
                       {secondPart}
                     </span>
                   </p>
-                  <p className="text-[#A6A6A6] text-2xl font-light">
+                  <p className="font-light text-2xl text-[#A6A6A6]">
                     {item.desc}
                   </p>
                 </Link>
@@ -348,9 +348,9 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={containerVariants}
-        className="bg-[#004714] relative w-full md:h-[369px] h-[500px] overflow-hidden"
+        className="relative h-[500px] w-full overflow-hidden bg-[#004714] md:h-[369px]"
       >
-        <div className="max-w-[90rem] mx-auto px-4 md:px-6 h-full grid grid-cols-1 md:grid-cols-2">
+        <div className="mx-auto grid h-full max-w-[90rem] grid-cols-1 px-4 md:grid-cols-2 md:px-6">
           {/* Left Section with Curved Edge */}
           <motion.div
             variants={slideInLeft as any}
@@ -363,7 +363,7 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.2 }}
               src="/new_images/TBALogo_origin.webp"
               alt="Transworld Logo"
-              className="z-10 w-[260px] md:w-[400px] object-contain"
+              className="z-10 w-[260px] object-contain md:w-[400px]"
             />
             <motion.img
               initial={{ opacity: 0, scale: 0.9 }}
@@ -372,17 +372,17 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.2 }}
               src="/new_images/Rectangle 151.png"
               alt="Transworld Logo"
-              className="z-0 h-[253px] md:w-[794px] md:left-4 object-contain absolute p-6 md:p-0"
+              className="absolute z-0 h-[253px] object-contain p-6 md:left-4 md:w-[794px] md:p-0"
             />
           </motion.div>
 
           {/* Right Section */}
           <motion.div
             variants={slideInRight as any}
-            className="bg-[#004714] flex flex-col justify-center text-white"
+            className="flex flex-col justify-center bg-[#004714] text-white"
           >
             <h2
-              className="text-xl md:text-xl  font-bold leading-snug"
+              className="font-bold text-xl leading-snug md:text-xl"
               style={{
                 fontFamily: "Inter",
               }}
@@ -395,7 +395,7 @@ export default function Home() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-[#F5F5F5A6] text-base md:text-[20px] font-light mt-4 leading-relaxed"
+              className="mt-4 font-light text-[#F5F5F5A6] text-base leading-relaxed md:text-[20px]"
             >
               We operate Transworld Business Advisors Ghana to connect African
               enterprises with global opportunity.

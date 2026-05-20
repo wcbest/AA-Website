@@ -1,22 +1,20 @@
 "use client";
 
+import Cookies from "js-cookie";
+import { LogOutIcon } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { MainNav } from "./main-nav";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOutIcon } from "lucide-react";
-import NavMenu from "./nav-menu";
 import { useAuth } from "@/hooks/use-auth-store";
-import Image from "next/image";
+import { MainNav } from "./main-nav";
 import { MobileToggle } from "./mobile.toggle";
-import Cookies from "js-cookie";
+import NavMenu from "./nav-menu";
 
 const Navbar = () => {
   const { onLogin, onLogout, isAuth, data } = useAuth();
@@ -31,10 +29,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="border-b fixed top-0 z-10 bg-white w-full">
-      <div className="flex h-16 items-center px-4 overflow-hidden">
+    <div className="fixed top-0 z-10 w-full border-b bg-white">
+      <div className="flex h-16 items-center overflow-hidden px-4">
         <Image
-          className="object-cover cursor-pointer"
+          className="cursor-pointer object-cover"
           alt="Image"
           src={`/images/AAlogo.jpeg`}
           width={100}
@@ -56,7 +54,7 @@ const Navbar = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mr-4">
               <DropdownMenuItem
-                className="w-full flex justify-between "
+                className="flex w-full justify-between"
                 onClick={handleClick}
               >
                 logout

@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export interface ConsultingCardProps {
   id: number;
@@ -31,13 +31,12 @@ export default function ConsultingCard({
   onToggle,
   visible = true,
 }: ConsultingCardProps) {
-  const getColorClass = (color?: "green" | "gray" | "gold") => {
+  const _getColorClass = (color?: "green" | "gray" | "gold") => {
     switch (color) {
       case "green":
         return "text-[#1a5928]";
       case "gold":
         return "text-[#c59446]";
-      case "gray":
       default:
         return "text-gray-800";
     }
@@ -45,42 +44,42 @@ export default function ConsultingCard({
 
   return (
     <div
-      className={`rounded-[20px] overflow-hidden flex flex-col transition-all duration-500 ease-in-out transform ${
+      className={`flex transform flex-col overflow-hidden rounded-[20px] transition-all duration-500 ease-in-out ${
         isExpanded ? "md:col-span-2 lg:col-span-3" : "scale-100"
       }`}
     >
       {isExpanded ? (
         // Expanded State
-        <div className="flex flex-col md:flex-row animate-fadeIn">
+        <div className="flex animate-fadeIn flex-col md:flex-row">
           <div className="relative h-full md:w-96">
-            <div className="relative h-48 w-full overflow-hidden group">
+            <div className="group relative h-48 w-full overflow-hidden">
               <Image
                 src={image || "/placeholder.svg"}
                 alt={imageAlt}
                 fill
-                className="object-cover  transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
-            <div className="p-6 flex-1 flex flex-col bg-[#026B20]">
+            <div className="flex flex-1 flex-col bg-[#026B20] p-6">
               <h3
-                className="text-[#fff] font-bold text-xl md:text-2xl mb-3 "
+                className="mb-3 font-bold text-[#fff] text-xl md:text-2xl"
                 style={{ fontFamily: "Inter" }}
               >
                 {title}
               </h3>
               <p
-                className="text-[#F7FAFE] font-normal text-sm md:text-base mb-6 flex-1 "
+                className="mb-6 flex-1 font-normal text-[#F7FAFE] text-sm md:text-base"
                 style={{ fontFamily: "Inter" }}
               >
                 {description}
               </p>
-              <div className="flex w-full justify-center items-center">
+              <div className="flex w-full items-center justify-center">
                 {isExpanded ? (
                   <Button
                     style={{ fontFamily: "Inter" }}
                     onClick={onToggle}
                     variant="outline"
-                    className="border-2 border-[#fff] text-[#fff] hover:bg-[#026B20] hover:text-white rounded-full px-8 py-2 w-fit bg-transparent"
+                    className="w-fit rounded-full border-2 border-[#fff] bg-transparent px-8 py-2 text-[#fff] hover:bg-[#026B20] hover:text-white"
                   >
                     Close
                   </Button>
@@ -89,7 +88,7 @@ export default function ConsultingCard({
                     style={{ fontFamily: "Inter" }}
                     onClick={onToggle}
                     variant="outline"
-                    className="border-2 border-[#fff] text-[#fff] hover:bg-[#026B20] hover:text-white rounded-full px-8 py-2 w-fit bg-transparent"
+                    className="w-fit rounded-full border-2 border-[#fff] bg-transparent px-8 py-2 text-[#fff] hover:bg-[#026B20] hover:text-white"
                   >
                     Read More
                   </Button>
@@ -97,12 +96,12 @@ export default function ConsultingCard({
               </div>
             </div>
           </div>
-          <div className="flex-1 pt-8 px-8 bg-white">
+          <div className="flex-1 bg-white px-8 pt-8">
             {/* <h3 className="text-[#739F46] font-medium text-2xl mb-4">
               {title}
             </h3> */}
             <p
-              className="text-[#636466] font-normal text-sm md:text-2xl mb-6 leading-relaxed"
+              className="mb-6 font-normal text-[#636466] text-sm leading-relaxed md:text-2xl"
               style={{ fontFamily: "Inter" }}
             >
               {expandedDescription}
@@ -112,8 +111,7 @@ export default function ConsultingCard({
               {details.map((detail, index) => (
                 <div key={index}>
                   <h4
-                    className={`
-                    font-semibold text-base mb-1 text-[#739F46]`}
+                    className={`mb-1 font-semibold text-[#739F46] text-base`}
                     style={{ fontFamily: "Inter" }}
                   >
                     {detail.title}
@@ -132,7 +130,7 @@ export default function ConsultingCard({
       ) : (
         // Collapsed State
         <>
-          <div className="relative h-48 w-full overflow-hidden group">
+          <div className="group relative h-48 w-full overflow-hidden">
             <Image
               src={image || "/placeholder.svg"}
               alt={imageAlt}
@@ -140,15 +138,15 @@ export default function ConsultingCard({
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
-          <div className="p-6 flex-1 flex flex-col bg-[#026B20] transition-all duration-300 hover:scale-[1.01]">
+          <div className="flex flex-1 flex-col bg-[#026B20] p-6 transition-all duration-300 hover:scale-[1.01]">
             <h3
-              className="text-[#fff] font-bold text-xl md:text-2xl mb-3 "
+              className="mb-3 font-bold text-[#fff] text-xl md:text-2xl"
               style={{ fontFamily: "Inter" }}
             >
               {title}
             </h3>
             <p
-              className="text-[#F7FAFE] font-normal text-sm md:text-base mb-6 flex-1 "
+              className="mb-6 flex-1 font-normal text-[#F7FAFE] text-sm md:text-base"
               style={{ fontFamily: "Inter" }}
             >
               {description}
@@ -158,7 +156,7 @@ export default function ConsultingCard({
                 style={{ fontFamily: "Inter" }}
                 onClick={onToggle}
                 variant="outline"
-                className="border-2 border-[#fff] text-[#fff] hover:bg-[#026B20] hover:text-white rounded-full px-8 py-2 w-fit bg-transparent"
+                className="w-fit rounded-full border-2 border-[#fff] bg-transparent px-8 py-2 text-[#fff] hover:bg-[#026B20] hover:text-white"
               >
                 Read More
               </Button>

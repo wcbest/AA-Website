@@ -1,14 +1,14 @@
 "use client";
 
+import * as motion from "motion/react-client";
+import Image from "next/image";
+import { useState } from "react";
 import BottomCTASection from "@/components/bottom-cta-section";
 import Breadcrumbs from "@/components/bread-crumbs";
 import ClientNavbar from "@/components/client-navbar";
 import Footer from "@/components/footer";
 import GlobalPartnerSection from "@/components/global-partner-section";
-import { Leader, LeadershipCard } from "@/components/leadership-card";
-import * as motion from "motion/react-client";
-import Image from "next/image";
-import { useState } from "react";
+import { type Leader, LeadershipCard } from "@/components/leadership-card";
 
 const AboutUs = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -63,7 +63,7 @@ const AboutUs = () => {
     },
   ];
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen">
       <ClientNavbar />
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -74,9 +74,9 @@ const AboutUs = () => {
         <Breadcrumbs />
 
         <div className="w-full">
-          <div className="py-4 md:py-[67px] w-full flex justify-center items-center border-b border-[#CCCCCCB2]">
+          <div className="flex w-full items-center justify-center border-[#CCCCCCB2] border-b py-4 md:py-[67px]">
             <p
-              className="text-[#739F46] text-2xl md:text-[85px] font-bold "
+              className="font-bold text-2xl text-[#739F46] md:text-[85px]"
               style={{
                 fontFamily: "Inter",
               }}
@@ -87,12 +87,12 @@ const AboutUs = () => {
         </div>
 
         <section className="bg-white py-16">
-          <div className="max-w-[90rem] mx-auto px-4 md:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 sm:gap-8 md:gap-12 items-center">
+          <div className="mx-auto max-w-[90rem] px-4 md:px-8">
+            <div className="grid grid-cols-1 items-center sm:gap-8 md:gap-12 lg:grid-cols-2">
               {/* LEFT IMAGES */}
-              <div className="relative w-full h-[320px] md:h-[420px]">
+              <div className="relative h-[320px] w-full md:h-[420px]">
                 {/* Top Image */}
-                <div className="absolute top-0 left-0 w-[70%] h-[70%] rounded-[50px] overflow-hidden z-0">
+                <div className="absolute top-0 left-0 z-0 h-[70%] w-[70%] overflow-hidden rounded-[50px]">
                   <Image
                     src="/new_images/2148913227 2.png"
                     alt="African business team collaborating"
@@ -102,7 +102,7 @@ const AboutUs = () => {
                 </div>
 
                 {/* Bottom Image – overlapping & moved slightly right */}
-                <div className="absolute -bottom-[100px] left-[90px] w-[70%] h-[70%] rounded-[50px] overflow-hidden z-10 shadow-lg">
+                <div className="absolute -bottom-[100px] left-[90px] z-10 h-[70%] w-[70%] overflow-hidden rounded-[50px] shadow-lg">
                   <Image
                     src="/new_images/precision-farming 1.png"
                     alt="African entrepreneur in agricultural setting"
@@ -113,9 +113,9 @@ const AboutUs = () => {
               </div>
 
               {/* RIGHT TEXT */}
-              <div className="space-y-6 mt-32 md:mt-0">
+              <div className="mt-32 space-y-6 md:mt-0">
                 <h2
-                  className="text-xl md:text-2xl  font-semibold text-[#000000]"
+                  className="font-semibold text-[#000000] text-xl md:text-2xl"
                   style={{ fontFamily: "Inter" }}
                 >
                   African Aspirations was founded on the belief that{" "}
@@ -129,22 +129,22 @@ const AboutUs = () => {
                 </h2>
 
                 <div className="space-y-4 text-[#000] leading-relaxed">
-                  <p className="font-normal  text-[#000] text-base md:text-xl">
+                  <p className="font-normal text-[#000] text-base md:text-xl">
                     Inspired by Dr. Kwame Nkrumah's vision of{" "}
                     <strong>a united and empowered Africa</strong>, our founders
                     set out to bridge the gap between African enterprises and
                     global opportunity.
                   </p>
 
-                  <p className="font-normal  text-[#000] text-base md:text-xl">
+                  <p className="font-normal text-[#000] text-base md:text-xl">
                     Through our three integrated divisions:
                   </p>
 
-                  <p className="text-[#739F46] font-semibold text-base md:text-xl">
+                  <p className="font-semibold text-[#739F46] text-base md:text-xl">
                     Business Consulting | Business Funding | Business Brokerage
                   </p>
 
-                  <p className="font-normal  text-[#636466] text-base md:text-xl">
+                  <p className="font-normal text-[#636466] text-base md:text-xl">
                     We connect business owners, investors, and advisors across
                     Africa and the world. Rooted in Ghana and expanding across
                     the continent. African Aspirations is redefining what it
@@ -158,37 +158,37 @@ const AboutUs = () => {
         </section>
       </motion.div>
       <div
-        className="bg-gradient-to-r from-[#000000] via-[#000] to-[#739F46] py-40 mt-20"
+        className="mt-20 bg-gradient-to-r from-[#000000] via-[#000] to-[#739F46] py-40"
         id="our-team"
       >
         {/* Leadership */}
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 md:gap-32 items-start">
-          <div className="text-white col-span-4 sm:col-span-3 md:col-span-1">
-            <h2
-              className="text-xl md:text-2xl lg:text-4xl font-bold mb-6 leading-tight"
-              style={{ fontFamily: "Inter" }}
-            >
-              Our
-              <br />
-              Leadership
-            </h2>
-            <p className="text-[#F1FBE6] font-light text-sm md:text-base leading-relaxed">
-              Our team combines world-class expertise with local insight to
-              deliver professional excellence across every engagement.
-            </p>
+        <div className="mx-auto max-w-[90rem] px-4 md:px-8">
+          <div className="grid grid-cols-1 items-start gap-y-4 sm:grid-cols-2 md:grid-cols-3 md:gap-32 lg:grid-cols-4">
+            <div className="col-span-4 text-white sm:col-span-3 md:col-span-1">
+              <h2
+                className="mb-6 font-bold text-xl leading-tight md:text-2xl lg:text-4xl"
+                style={{ fontFamily: "Inter" }}
+              >
+                Our
+                <br />
+                Leadership
+              </h2>
+              <p className="font-light text-[#F1FBE6] text-sm leading-relaxed md:text-base">
+                Our team combines world-class expertise with local insight to
+                deliver professional excellence across every engagement.
+              </p>
+            </div>
+            <div className="col-span-3 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+              {leaders.map((leader) => (
+                <LeadershipCard
+                  key={leader.id}
+                  leader={leader}
+                  isExpanded={expandedId === leader.id}
+                  onToggle={() => handleToggle(leader.id)}
+                />
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 col-span-3">
-            {leaders.map((leader) => (
-              <LeadershipCard
-                key={leader.id}
-                leader={leader}
-                isExpanded={expandedId === leader.id}
-                onToggle={() => handleToggle(leader.id)}
-              />
-            ))}
-          </div>
-        </div>
         </div>
       </div>
 

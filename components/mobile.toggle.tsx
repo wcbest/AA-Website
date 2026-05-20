@@ -1,25 +1,22 @@
 "use client";
 
-import { Menu } from "lucide-react";
-import Cookies from "js-cookie";
-
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { MainNav } from "./main-nav";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { Menu } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAuth } from "@/hooks/use-auth-store";
+import { cn } from "@/lib/utils";
 
 export const MobileToggle: React.FC<any> = () => {
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [_loading, setLoading] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const params = useParams();
+  const _params = useParams();
   const { onLogin, onLogout, isAuth, data } = useAuth();
 
   const routes = [
@@ -78,7 +75,7 @@ export const MobileToggle: React.FC<any> = () => {
           },
         });
         setCategories(response.data);
-      } catch (error: any) {
+      } catch (_error: any) {
         // toast.error("Something went wrong!!");
       } finally {
         setLoading(false);
@@ -93,9 +90,9 @@ export const MobileToggle: React.FC<any> = () => {
       <SheetTrigger asChild>
         <Menu size={18} cursor="pointer" className="flex md:hidden" />
       </SheetTrigger>
-      <SheetContent side="left" className="p-0 flex gap-0 flex-col ">
+      <SheetContent side="left" className="flex flex-col gap-0 p-0">
         <Image
-          className="object-cover cursor-pointer"
+          className="cursor-pointer object-cover"
           alt="Image"
           src={`/images/AAlogo.jpeg`}
           width={100}
@@ -105,7 +102,7 @@ export const MobileToggle: React.FC<any> = () => {
         />
         <nav
           className={cn(
-            "flex flex-col  "
+            "flex flex-col",
             // className
           )}
           //   {...props}
@@ -115,10 +112,10 @@ export const MobileToggle: React.FC<any> = () => {
               key={route.href}
               href={route.href}
               className={cn(
-                "text-xl m-3 font-medium transition-colors hover:text-primary",
+                "m-3 font-medium text-xl transition-colors hover:text-primary",
                 route.active
                   ? "text-black dark:text-white"
-                  : "text-muted-foreground"
+                  : "text-muted-foreground",
               )}
             >
               {route.label}
@@ -131,10 +128,10 @@ export const MobileToggle: React.FC<any> = () => {
             key={route._id}
             onClick={() => router.push(`/category/${route.label}`)}
             className={cn(
-              "font-medium transition-colors hover:text-primary cursor-pointer text-xl m-3",
+              "m-3 cursor-pointer font-medium text-xl transition-colors hover:text-primary",
               route.active
                 ? "text-black dark:text-white"
-                : "text-muted-foreground"
+                : "text-muted-foreground",
             )}
           >
             {route.label}

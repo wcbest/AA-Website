@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { ImagePlus, Trash } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
 import firebase from "@/firebase/firebase";
 import "firebase/compat/storage";
 
@@ -25,16 +24,16 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ setFile, file }) => {
   }, []);
 
   const onFileSelected = (e: any) => {
-    let file = e.target.files[0];
-    var storageRef = firebase.storage().ref("/billboards/" + file.name);
+    const file = e.target.files[0];
+    var storageRef = firebase.storage().ref(`/billboards/${file.name}`);
 
-    let uploadTask = storageRef.put(file);
+    const uploadTask = storageRef.put(file);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setLoading("Upload is " + progress + "% done");
-        console.log("Upload is " + progress + "% done");
+        setLoading(`Upload is ${progress}% done`);
+        console.log(`Upload is ${progress}% done`);
         switch (snapshot.state) {
           case firebase.storage.TaskState.PAUSED: // or 'paused'
             console.log("Upload is paused");
@@ -58,7 +57,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ setFile, file }) => {
           setSelectedFile(downloadURL);
           setFile(downloadURL);
         });
-      }
+      },
     );
   };
 
@@ -75,8 +74,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ setFile, file }) => {
     <div>
       <div className="mb-4 flex items-center gap-4">
         {selectedFile.length > 0 || file?.length > 0 ? (
-          <div className="relative w-[200px] h-[200px] rounded-md overflow-hidden">
-            <div className="z-10 absolute top-2 right-2">
+          <div className="relative h-[200px] w-[200px] overflow-hidden rounded-md">
+            <div className="absolute top-2 right-2 z-10">
               <Button
                 type="button"
                 onClick={() => {
@@ -100,14 +99,14 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ setFile, file }) => {
           </div>
         ) : null}
       </div>
-      <p className="text-black text-xs mb-4">{loading}</p>
+      <p className="mb-4 text-black text-xs">{loading}</p>
       <Button
         type="button"
         disabled={false}
         onClick={handleUploadButtonClick}
-        className="mb-4 text-white bg-black"
+        className="mb-4 bg-black text-white"
       >
-        <ImagePlus className="h-4 w-4 mr-2 " />
+        <ImagePlus className="mr-2 h-4 w-4" />
         Upload an Image
       </Button>
       <input

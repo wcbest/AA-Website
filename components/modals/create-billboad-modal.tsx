@@ -1,8 +1,11 @@
 "use client";
 
 import axios from "axios";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Toaster, toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,15 +13,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/use-modal-store";
-import { useEffect, useState } from "react";
 import ImageUpload from "../image-upload";
-import { Toaster, toast } from "sonner";
-import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 export const CreateBillBoardModal = () => {
   const { isOpen, onClose, type, data, onRender } = useModal();
@@ -32,13 +29,13 @@ export const CreateBillBoardModal = () => {
 
   const isModalOpen = isOpen && type === "createBillboard";
 
-  const router = useRouter();
+  const _router = useRouter();
 
   const submit = async () => {
     try {
       setLoading(true);
 
-      const response = await axios.post(
+      const _response = await axios.post(
         "/api/billboards/",
         {
           label: textInput,
@@ -48,7 +45,7 @@ export const CreateBillBoardModal = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       toast.success("Billboard created successfully!!");
@@ -72,16 +69,16 @@ export const CreateBillBoardModal = () => {
     <>
       <Toaster position="top-center" />
       <Dialog open={isModalOpen} onOpenChange={handleClose}>
-        <DialogContent className="bg-white text-black p-0 overflow-hidden">
-          <DialogHeader className="pt-8 px-6">
-            <DialogTitle className="text-2xl text-center font-bold">
+        <DialogContent className="overflow-hidden bg-white p-0 text-black">
+          <DialogHeader className="px-6 pt-8">
+            <DialogTitle className="text-center font-bold text-2xl">
               Create Billboard
             </DialogTitle>
           </DialogHeader>
           <form className="m-4">
             <ImageUpload setFile={setFile} />
             <Input
-              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+              className="border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder="Enter text"
               value={textInput}
               onChange={handleInputChange}

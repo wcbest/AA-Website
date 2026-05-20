@@ -1,16 +1,11 @@
 "use client";
 
 import axios from "axios";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Toaster, toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -18,24 +13,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/use-modal-store";
-import React, { useEffect, useState } from "react";
-import ImageUpload from "../image-upload";
-import { Toaster, toast } from "sonner";
-import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 export const CreateCategoryModal = () => {
   const { isOpen, onClose, type, data, onRender } = useModal();
-  const [file, setFile] = useState("");
+  const [_file, _setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [nameInput, setNameInput] = useState("");
   const [DescInput, setDescInput] = useState("");
-  const [linkInput, setLinkInput] = useState("");
-  const [categoryInput, setCategoryInput] = useState("");
+  const [_linkInput, _setLinkInput] = useState("");
+  const [_categoryInput, _setCategoryInput] = useState("");
 
   const handleNameInputChange = (e: any) => {
     setNameInput(e.target.value);
@@ -47,14 +35,14 @@ export const CreateCategoryModal = () => {
 
   const isModalOpen = isOpen && type === "createCategory";
 
-  const router = useRouter();
+  const _router = useRouter();
 
   // create category
   const submit = async () => {
     try {
       setLoading(true);
 
-      const response = await axios.post(
+      const _response = await axios.post(
         "/api/categories/",
         {
           label: nameInput,
@@ -64,7 +52,7 @@ export const CreateCategoryModal = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       toast.success("Category created successfully!!");
@@ -88,20 +76,20 @@ export const CreateCategoryModal = () => {
     <>
       <Toaster position="top-center" />
       <Dialog open={isModalOpen} onOpenChange={handleClose}>
-        <DialogContent className="bg-white text-black p-0 overflow-hidden">
-          <DialogHeader className="pt-8 px-6">
-            <DialogTitle className="text-2xl text-center font-bold">
+        <DialogContent className="overflow-hidden bg-white p-0 text-black">
+          <DialogHeader className="px-6 pt-8">
+            <DialogTitle className="text-center font-bold text-2xl">
               Create Category
             </DialogTitle>
           </DialogHeader>
           <form action="" className="m-4">
             <Input
-              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 mb-3"
+              className="mb-3 border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder="Category Name"
               onChange={handleNameInputChange}
             />
             <Input
-              className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 mb-3"
+              className="mb-3 border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder="Short Description"
               onChange={handleDescInputChange}
             />

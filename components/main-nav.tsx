@@ -1,19 +1,17 @@
 "use client";
 
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
-import Cookies from "js-cookie";
-
-import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth-store";
-import { MobileToggle } from "./mobile.toggle";
+import { cn } from "@/lib/utils";
 
 export function MainNav({
   className,
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
-  const params = useParams();
+  const _params = useParams();
   const { onLogin, onLogout, isAuth, data } = useAuth();
 
   const routes = [
@@ -63,8 +61,8 @@ export function MainNav({
   return (
     <nav
       className={cn(
-        "hidden sm:flex items-center space-x-4 sm:space-x-6",
-        className
+        "hidden items-center space-x-4 sm:flex sm:space-x-6",
+        className,
       )}
       {...props}
     >
@@ -73,10 +71,10 @@ export function MainNav({
           key={route.href}
           href={route.href}
           className={cn(
-            "text-sm font-medium transition-colors hover:text-primary",
+            "font-medium text-sm transition-colors hover:text-primary",
             route.active
               ? "text-black dark:text-white"
-              : "text-muted-foreground"
+              : "text-muted-foreground",
           )}
         >
           {route.label}

@@ -1,9 +1,9 @@
 // components/Breadcrumbs.tsx
 "use client";
 
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronRight } from "lucide-react";
 import { getBreadcrumbTrail } from "@/lib/getBreadCrumbs";
 
 export default function Breadcrumbs() {
@@ -17,7 +17,7 @@ export default function Breadcrumbs() {
   const fallbackCrumbs = (p: string) => {
     const segments = p.split("/").filter(Boolean);
     return segments.map((seg, i) => {
-      const href = "/" + segments.slice(0, i + 1).join("/");
+      const href = `/${segments.slice(0, i + 1).join("/")}`;
       const label = decodeURIComponent(seg)
         .replace(/-/g, " ")
         .replace(/\b\w/g, (c) => c.toUpperCase());
@@ -40,9 +40,9 @@ export default function Breadcrumbs() {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="text-base text-[#1E1E1E] mb-6 bg-[#F1FBE6]"
+      className="mb-6 bg-[#F1FBE6] text-[#1E1E1E] text-base"
     >
-      <div className="max-w-[90rem] mx-auto px-4 md:px-8 py-3 flex items-center space-x-2">
+      <div className="mx-auto flex max-w-[90rem] items-center space-x-2 px-4 py-3 md:px-8">
         <Link
           href="/"
           className="flex items-center font-semibold text-[#1E1E1E] hover:text-gray-900"
@@ -55,7 +55,7 @@ export default function Breadcrumbs() {
             key={`${c.href ?? c.title}-${i}`}
             className="flex items-center space-x-2"
           >
-            <ChevronRight size={16} className="text-[#739F46] mx-3" />
+            <ChevronRight size={16} className="mx-3 text-[#739F46]" />
             {i === crumbs.length - 1 || !c.href ? (
               <span className="font-normal text-[#858585]">
                 {labelFromHref(c.href ?? c.title)}
@@ -63,7 +63,7 @@ export default function Breadcrumbs() {
             ) : (
               <Link
                 href={c.href}
-                className="hover:text-gray-900 transition-colors font-normal"
+                className="font-normal transition-colors hover:text-gray-900"
               >
                 {labelFromHref(c.href)}
               </Link>

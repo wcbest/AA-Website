@@ -1,5 +1,7 @@
 "use client";
 
+import * as motion from "motion/react-client";
+import { useEffect, useState } from "react";
 import BottomHero from "@/components/BottomHero";
 import Breadcrumbs from "@/components/bread-crumbs";
 import ClientNavbar from "@/components/client-navbar";
@@ -9,10 +11,8 @@ import ConsultingCard, {
 import FloatingArrow from "@/components/floating-arrow";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/HeroSection";
-import * as motion from "motion/react-client";
-import { useEffect, useState } from "react";
 
-const businessFundingServices = [
+const _businessFundingServices = [
   {
     id: "private-equity",
     title: "Private Equity",
@@ -341,11 +341,11 @@ export default function BusinessBrokeragePage() {
       <FloatingArrow />
 
       <section className="bg-[#015A1A] py-16">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8">
+        <div className="mx-auto max-w-[90rem] px-4 md:px-8">
           {/* Header */}
           <div className="mb-12">
             <h2
-              className="text-white text-3xl md:text-4xl font-bold mb-3 "
+              className="mb-3 font-bold text-3xl text-white md:text-4xl"
               style={{
                 fontFamily: "Inter",
               }}
@@ -354,7 +354,7 @@ export default function BusinessBrokeragePage() {
               investment-ready businesses.
             </h2>
             <p
-              className="text-white/90 text-2xl md:text-lg "
+              className="text-2xl text-white/90 md:text-lg"
               style={{
                 fontFamily: "Inter",
               }}
@@ -366,7 +366,7 @@ export default function BusinessBrokeragePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {fundingCards.map((card) => (
               <ConsultingCard
                 key={card.id}

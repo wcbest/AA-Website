@@ -1,11 +1,10 @@
-import Product from "@/models/Products";
+import { NextResponse } from "next/server";
 import Category from "@/models/Categories";
 import connect from "@/utils/db";
-import { NextResponse } from "next/server";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
+  _req: Request,
+  { params }: { params: { id: string } },
 ) {
   await connect();
 
@@ -21,14 +20,14 @@ export async function GET(
     return NextResponse.json(category, {
       status: 200,
     });
-  } catch (err) {
+  } catch (_err) {
     return new NextResponse("Server Error", { status: 500 });
   }
 }
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   await connect();
 
@@ -58,7 +57,7 @@ export async function PATCH(
     },
     {
       new: true,
-    }
+    },
   );
 
   try {
@@ -70,8 +69,8 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
+  _req: Request,
+  { params }: { params: { id: string } },
 ) {
   await connect();
 

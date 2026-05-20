@@ -1,6 +1,6 @@
 // lib/getBreadcrumbs.ts
 
-import { navigationItems, NavItem } from "@/components/client-navbar";
+import { type NavItem, navigationItems } from "@/components/client-navbar";
 
 export type Breadcrumb = { title: string; href?: string };
 
@@ -18,13 +18,16 @@ export function getBreadcrumbTrail(pathname: string): Breadcrumb[] {
 
   function findPath(
     items: NavItem[],
-    parentTrail: Breadcrumb[]
+    parentTrail: Breadcrumb[],
   ): Breadcrumb[] | null {
     for (const item of items) {
       const itemHrefBase = normalizePath(item.href?.split("#")[0]);
       const currentTrail = [
         ...parentTrail,
-        { title: item.title, href: item.subItems?.length ? undefined : item.href },
+        {
+          title: item.title,
+          href: item.subItems?.length ? undefined : item.href,
+        },
       ];
 
       // exact match (including top-level pages)

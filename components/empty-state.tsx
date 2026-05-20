@@ -15,21 +15,12 @@ const EmptyState: React.FC<EmptyStateProps> = ({
   const router = useRouter();
 
   return (
-    <div
-      className="
-        h-[60vh]
-        flex 
-        flex-col 
-        gap-2 
-        justify-center 
-        items-center 
-      "
-    >
+    <div className="flex h-[60vh] flex-col items-center justify-center gap-2">
       <div className="text-center">
-        <div className="text-2xl font-bold">{title}</div>
-        <div className="font-light text-neutral-500 mt-2">{subtitle}</div>
+        <div className="font-bold text-2xl">{title}</div>
+        <div className="mt-2 font-light text-neutral-500">{subtitle}</div>
       </div>
-      <div className="w-48 mt-4 flex items-center justify-center">
+      <div className="mt-4 flex w-48 items-center justify-center">
         <Button onClick={() => router.push("/")}> Go Home</Button>
       </div>
     </div>

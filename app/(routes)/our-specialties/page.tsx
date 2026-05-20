@@ -1,14 +1,14 @@
 "use client";
 
+import * as motion from "motion/react-client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import BottomHero from "@/components/BottomHero";
 import Breadcrumbs from "@/components/bread-crumbs";
 import ClientNavbar from "@/components/client-navbar";
 import FloatingArrow from "@/components/floating-arrow";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/HeroSection";
-import * as motion from "motion/react-client";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 const businessBrokerageServices = [
   {
@@ -92,9 +92,9 @@ export default function BusinessBrokeragePage() {
 
       {/* Hero Section */}
       <section className="pt-10 pb-16">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8">
+        <div className="mx-auto max-w-[90rem] px-4 md:px-8">
           <div className="mx-auto">
-            <p className="text-[#1E1E1E] text-3xl font-thin leading-relaxed">
+            <p className="font-thin text-3xl text-[#1E1E1E] leading-relaxed">
               With deep expertise across Life, General, Health, Brokerage, and
               Reinsurance, we provide integrated solutions that drive
               sustainable growth and technical excellence for insurers, brokers,
@@ -105,22 +105,22 @@ export default function BusinessBrokeragePage() {
       </section>
 
       <div className="bg-white py-16">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8">
+        <div className="mx-auto max-w-[90rem] px-4 md:px-8">
           {/* Section Header */}
           <div className="mb-16">
-            <h2 className="text-4xl md:text-5xl font-thin text-[#1E1E1E] mb-4">
+            <h2 className="mb-4 font-thin text-4xl text-[#1E1E1E] md:text-5xl">
               Our specialties
             </h2>
           </div>
 
           {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10 gap-y-28  mx-auto">
+          <div className="mx-auto grid grid-cols-1 gap-10 gap-y-28 md:grid-cols-2 lg:grid-cols-3">
             {/* Management Consulting */}
             {businessBrokerageServices.map((item) => (
               <div
                 key={item?.id}
                 id={item?.id}
-                className="bg-white flex items-baseline gap-2 rounded-lg  transition duration-300"
+                className="flex items-baseline gap-2 rounded-lg bg-white transition duration-300"
               >
                 <div>
                   <svg
@@ -142,21 +142,21 @@ export default function BusinessBrokeragePage() {
 
                 <div>
                   <h3
-                    className="text-3xl  font-bold text-[#1E1E1E] mb-2"
+                    className="mb-2 font-bold text-3xl text-[#1E1E1E]"
                     style={{
                       fontFamily: "Inter",
                     }}
                   >
                     {item?.title}
                   </h3>
-                  <p className="text-[#757575] font-normal mb-4 leading-relaxed">
+                  <p className="mb-4 font-normal text-[#757575] leading-relaxed">
                     {item?.description}
                   </p>
                   <button
                     onClick={() => {
                       router.push(item?.href);
                     }}
-                    className="text-[#303030] text-xl font-light  flex items-center gap-2 hover:gap-3 transition-all duration-300"
+                    className="flex items-center gap-2 font-light text-[#303030] text-xl transition-all duration-300 hover:gap-3"
                   >
                     See more
                     <svg
@@ -178,8 +178,8 @@ export default function BusinessBrokeragePage() {
                 </div>
               </div>
             ))}
-            <div className="bg-[#F2BA00] md:w-[410px] h-[231px] rounded-[34px] flex justify-center items-center">
-              <p className="text-[52px] p-7 leading-10">and many more...</p>
+            <div className="flex h-[231px] items-center justify-center rounded-[34px] bg-[#F2BA00] md:w-[410px]">
+              <p className="p-7 text-[52px] leading-10">and many more...</p>
             </div>
           </div>
         </div>

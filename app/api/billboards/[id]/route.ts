@@ -1,10 +1,10 @@
+import { NextResponse } from "next/server";
 import Billboard from "@/models/Billboards";
 import connect from "@/utils/db";
-import { NextResponse } from "next/server";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
+  _req: Request,
+  { params }: { params: { id: string } },
 ) {
   await connect();
 
@@ -20,14 +20,14 @@ export async function GET(
     return NextResponse.json(billboard, {
       status: 200,
     });
-  } catch (err) {
+  } catch (_err) {
     return new NextResponse("Server Error", { status: 500 });
   }
 }
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   await connect();
 
@@ -63,7 +63,7 @@ export async function PATCH(
     },
     {
       new: true,
-    }
+    },
   );
   console.log(updateBillboard);
 
@@ -76,8 +76,8 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
+  _req: Request,
+  { params }: { params: { id: string } },
 ) {
   await connect();
 

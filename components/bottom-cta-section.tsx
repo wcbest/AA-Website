@@ -16,10 +16,10 @@ export default function BottomCTASection({
   link,
 }: BottomCTASectionProps) {
   return (
-    <section className="relative bg-gray-900 overflow-hidden flex justify-center items-center h-[550px]">
+    <section className="relative flex h-[550px] items-center justify-center overflow-hidden bg-gray-900">
       {/* Background Image with Overlay */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-30"
+        className="absolute inset-0 bg-center bg-cover opacity-30"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
@@ -29,9 +29,9 @@ export default function BottomCTASection({
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/60" />
 
       {/* Content */}
-      <div className="relative max-w-[90rem] mx-auto px-4 md:px-8 flex justify-center items-center flex-col text-center">
+      <div className="relative mx-auto flex max-w-[90rem] flex-col items-center justify-center px-4 text-center md:px-8">
         <h2
-          className="text-3xl md:text-4xl lg:text-7xl font-bold text-white mb-8"
+          className="mb-8 font-bold text-3xl text-white md:text-4xl lg:text-7xl"
           style={{ fontFamily: "Inter" }}
         >
           {question}
@@ -52,9 +52,10 @@ export default function BottomCTASection({
           href={link}
           target="_blank"
           whileTap={{ scale: 0.95 }}
-          className="bg-[#F2BA00] border border-[#2C2C2C] flex items-center justify-between gap-4 rounded-full px-8 py-2 hover:bg-[#cc9f53] transition-colors duration-300"
+          className="flex items-center justify-between gap-4 rounded-full border border-[#2C2C2C] bg-[#F2BA00] px-8 py-2 transition-colors duration-300 hover:bg-[#cc9f53]"
+          rel="noopener"
         >
-          <span className="text-[#3C3C3C] font-medium text-base">
+          <span className="font-medium text-[#3C3C3C] text-base">
             {buttonText}
           </span>
 

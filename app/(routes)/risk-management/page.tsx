@@ -1,14 +1,14 @@
 "use client";
 
+import * as motion from "motion/react-client";
+import Image from "next/image";
+import { useEffect } from "react";
 import BottomHero from "@/components/BottomHero";
 import Breadcrumbs from "@/components/bread-crumbs";
 import ClientNavbar from "@/components/client-navbar";
 import FloatingArrow from "@/components/floating-arrow";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/HeroSection";
-import * as motion from "motion/react-client";
-import Image from "next/image";
-import { useEffect } from "react";
 
 const businessBrokerageServices = [
   {
@@ -100,9 +100,9 @@ export default function BusinessBrokeragePage() {
 
       {/* Hero Section */}
       <section className="pt-10 pb-16">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8">
+        <div className="mx-auto max-w-[90rem] px-4 md:px-8">
           <div className="mx-auto">
-            <p className="text-[#1E1E1E] text-3xl font-thin leading-relaxed">
+            <p className="font-thin text-3xl text-[#1E1E1E] leading-relaxed">
               Our Risk Management practice helps organizations view risk as both
               a defensive and offensive tool for growth. We implement frameworks
               that balance protection and performance through robust governance
@@ -114,15 +114,15 @@ export default function BusinessBrokeragePage() {
 
       {/* Services Grid */}
       <section className="bg-white py-20">
-        <div className="max-w-[90rem] mx-auto px-4 md:px-8">
+        <div className="mx-auto max-w-[90rem] px-4 md:px-8">
           <h2
-            className="text-[#1E1E1E]  text-4xl sm:text-5xl font-light mb-12 max-w-[950px]"
+            className="mb-12 max-w-[950px] font-light text-4xl text-[#1E1E1E] sm:text-5xl"
             style={{
               fontFamily: "Inter",
             }}
           >
             Risk Management opportunities available with African{" "}
-            <span className="text-[#FFC72C] font-normal">Aspirations</span>
+            <span className="font-normal text-[#FFC72C]">Aspirations</span>
           </h2>
 
           <div className="space-y-8">
@@ -130,28 +130,28 @@ export default function BusinessBrokeragePage() {
               <div
                 key={item?.id}
                 id={item?.id}
-                className="border-l border-r border-t border-b border-[#FFC72C] p-6 sm:p-8 rounded-lg"
+                className="rounded-lg border-[#FFC72C] border-t border-r border-b border-l p-6 sm:p-8"
               >
-                <div className="flex flex-wrap md:flex-nowrap items-start space-x-6">
+                <div className="flex flex-wrap items-start space-x-6 md:flex-nowrap">
                   <div className="flex-shrink-0">
-                    <div className="w-40 h-full">
+                    <div className="h-full w-40">
                       <Image
                         src={item.icon as string}
                         width={100}
                         height={100}
                         alt={item?.description}
-                        className="w-40 h-full"
+                        className="h-full w-40"
                       />
                     </div>
                   </div>
                   <div>
                     <h3
-                      className="text-3xl font-bold text-[#1E1E1E] mb-2"
+                      className="mb-2 font-bold text-3xl text-[#1E1E1E]"
                       style={{ fontFamily: "Inter" }}
                     >
                       {item?.title}
                     </h3>
-                    <p className="text-[#757575] text-xl font-normal mb-4">
+                    <p className="mb-4 font-normal text-[#757575] text-xl">
                       {item?.description}
                     </p>
                     {/* <a

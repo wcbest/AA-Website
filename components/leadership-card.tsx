@@ -42,15 +42,15 @@ export function LeadershipCard({
 
   return (
     <div
-      className={`rounded-[20px] overflow-hidden flex flex-col transition-all duration-500 ease-in-out transform ${
+      className={`flex transform flex-col overflow-hidden rounded-[20px] transition-all duration-500 ease-in-out ${
         isExpanded ? "md:col-span-2 lg:col-span-3" : "scale-100"
       }`}
     >
       {isExpanded ? (
         // Expanded State
-        <div className="flex flex-col md:flex-row animate-fadeIn">
+        <div className="flex animate-fadeIn flex-col md:flex-row">
           <div className="relative h-full md:w-96">
-            <div className="relative h-96 w-full overflow-hidden group">
+            <div className="group relative h-96 w-full overflow-hidden">
               <Image
                 src={image || "/placeholder.svg"}
                 alt={imageAlt}
@@ -58,20 +58,20 @@ export function LeadershipCard({
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
-            <div className="p-6 flex-1 flex flex-col bg-[#FFFFFF]">
+            <div className="flex flex-1 flex-col bg-[#FFFFFF] p-6">
               <h3
-                className="text-[#0C0D0C] font-bold text-xl md:text-2xl mb-3"
+                className="mb-3 font-bold text-[#0C0D0C] text-xl md:text-2xl"
                 style={{
                   fontFamily: "Inter",
                 }}
               >
                 {name}{" "}
-                <span className="font-bold text-[#739F46] text-[12px] ml-1">
+                <span className="ml-1 font-bold text-[#739F46] text-[12px]">
                   {credentials}
                 </span>
               </h3>
               <p
-                className="text-[#0C0D0C] font-normal text-sm md:text-base mb-6 flex-1"
+                className="mb-6 flex-1 font-normal text-[#0C0D0C] text-sm md:text-base"
                 style={{
                   fontFamily: "Inter",
                 }}
@@ -80,7 +80,7 @@ export function LeadershipCard({
               </p>
               <button
                 onClick={onToggle}
-                className="flex justify-end items-end self-end text-[#fff] hover:bg-transparent hover:text-white rounded-fullw-fit bg-transparent "
+                className="flex items-end justify-end self-end rounded-fullw-fit bg-transparent text-[#fff] hover:bg-transparent hover:text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -104,9 +104,9 @@ export function LeadershipCard({
               </button>
             </div>
           </div>
-          <div className="flex-1 pt-4 px-8 bg-white">
+          <div className="flex-1 bg-white px-8 pt-4">
             <p
-              className="text-[#739F46] font-bold text-xs md:text-[15px] mb-6 leading-relaxed"
+              className="mb-6 font-bold text-[#739F46] text-xs leading-relaxed md:text-[15px]"
               style={{
                 fontFamily: "Inter",
               }}
@@ -114,7 +114,7 @@ export function LeadershipCard({
               {description}
             </p>
             <p
-              className="text-[#000000] font-normal text-[10px] md:text-xs mb-4 leading-relaxed"
+              className="mb-4 font-normal text-[#000000] text-[10px] leading-relaxed md:text-xs"
               style={{
                 fontFamily: "Inter",
               }}
@@ -122,7 +122,7 @@ export function LeadershipCard({
               {bio1}
             </p>
             <p
-              className="text-[#000000] font-normal text-[10px]  md:text-xs mb-4 leading-relaxed"
+              className="mb-4 font-normal text-[#000000] text-[10px] leading-relaxed md:text-xs"
               style={{
                 fontFamily: "Inter",
               }}
@@ -130,7 +130,7 @@ export function LeadershipCard({
               {bio2}
             </p>
             <p
-              className="text-[#000000] font-normal text-[10px]  md:text-xs mb-4 leading-relaxed"
+              className="mb-4 font-normal text-[#000000] text-[10px] leading-relaxed md:text-xs"
               style={{
                 fontFamily: "Inter",
               }}
@@ -138,7 +138,7 @@ export function LeadershipCard({
               {bio3}
             </p>
             <p
-              className="text-[#000000] font-normal text-[10px]  md:text-xs mb-4 leading-relaxed"
+              className="mb-4 font-normal text-[#000000] text-[10px] leading-relaxed md:text-xs"
               style={{
                 fontFamily: "Inter",
               }}
@@ -150,7 +150,7 @@ export function LeadershipCard({
       ) : (
         // Collapsed State
         <>
-          <div className="relative h-80 w-full overflow-hidden group">
+          <div className="group relative h-80 w-full overflow-hidden">
             <Image
               src={image || "/placeholder.svg"}
               alt={imageAlt}
@@ -158,18 +158,18 @@ export function LeadershipCard({
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
-          <div className="p-6 flex-1 flex flex-col bg-[#fff] transition-all duration-300 hover:scale-[1.01] h-[94px]">
+          <div className="flex h-[94px] flex-1 flex-col bg-[#fff] p-6 transition-all duration-300 hover:scale-[1.01]">
             <h3
-              className="text-[#0C0D0C] font-bold text-xl mb-[2px]"
+              className="mb-[2px] font-bold text-[#0C0D0C] text-xl"
               style={{ fontFamily: "Inter" }}
             >
               {name}
-              <span className="font-bold text-[#739F46] text-[10px] ml-1">
+              <span className="ml-1 font-bold text-[#739F46] text-[10px]">
                 {credentials}
               </span>
             </h3>
             <p
-              className="text-[#0C0D0C] font-normal text-sm flex-1"
+              className="flex-1 font-normal text-[#0C0D0C] text-sm"
               style={{ fontFamily: "Inter" }}
             >
               {title}
@@ -177,7 +177,7 @@ export function LeadershipCard({
 
             <button
               onClick={onToggle}
-              className="flex justify-end items-end self-end border-2 border-[#fff] text-[#fff] hover:bg-transparent hover:text-white rounded-fullw-fit bg-transparent "
+              className="flex items-end justify-end self-end rounded-fullw-fit border-2 border-[#fff] bg-transparent text-[#fff] hover:bg-transparent hover:text-white"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

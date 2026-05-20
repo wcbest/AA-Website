@@ -1,21 +1,19 @@
 "use client";
 
+import axios from "axios";
+import { Pencil, Plus, Trash2 } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Toaster, toast } from "sonner";
+import { AlertModal } from "@/components/alert";
+import EmptyState from "@/components/empty-state";
 import { Heading } from "@/components/heading";
+import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useModal } from "@/hooks/use-modal-store";
 import { useAuth } from "@/hooks/use-auth-store";
-import axios from "axios";
-import { Plus } from "lucide-react";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { Toaster, toast } from "sonner";
-import { Trash2 } from "lucide-react";
-import { Pencil } from "lucide-react";
-import Loader from "@/components/loader";
-import EmptyState from "@/components/empty-state";
-import { AlertModal } from "@/components/alert";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import { useModal } from "@/hooks/use-modal-store";
 
 const Products = () => {
   const { onOpen, isOpen, data, render } = useModal();
@@ -25,14 +23,14 @@ const Products = () => {
   const [productNo, setProductNo] = useState(0);
   const [openDel, setOpenDel] = useState(false);
   const [getProdId, setGetProdId] = useState("");
-  const [file, setFile] = useState("");
+  const [_file, setFile] = useState("");
   const [products, setProducts] = useState<any>([]);
-  const [nameInput, setNameInput] = useState("");
-  const [DescInput, setDescInput] = useState("");
-  const [linkInput, setLinkInput] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [categoryInput, setCategoryInput] = useState("");
-  const router = useRouter();
+  const [_nameInput, setNameInput] = useState("");
+  const [_DescInput, setDescInput] = useState("");
+  const [_linkInput, setLinkInput] = useState("");
+  const [_categories, _setCategories] = useState([]);
+  const [_categoryInput, setCategoryInput] = useState("");
+  const _router = useRouter();
 
   // get all products
   const getProducts = async () => {
@@ -81,7 +79,7 @@ const Products = () => {
     try {
       setDelLoading(true);
 
-      const response = await axios.delete(`/api/products/${id}`, {
+      const _response = await axios.delete(`/api/products/${id}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -99,61 +97,61 @@ const Products = () => {
 
   useEffect(() => {
     getProducts();
-  }, [render, delLoading]);
+  }, [getProducts]);
 
   return (
     <div className="flex-col">
       <Toaster position="top-center" />
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <div className="flex items-start flex-col md:flex-row justify-between">
+        <div className="flex flex-col items-start justify-between md:flex-row">
           <Heading
             title={`Products (${productNo})`}
             description="Manage all products on the app"
           />
-          <Button className="mb-4 " onClick={() => onOpen("createProduct")}>
-            <Plus className="mr-2  h-4 w-4" /> Add New Product
+          <Button className="mb-4" onClick={() => onOpen("createProduct")}>
+            <Plus className="mr-2 h-4 w-4" /> Add New Product
           </Button>
         </div>
       </div>
       <Separator />
-      <div className="flex items-start justify-start p-5 w-full flex-wrap">
+      <div className="flex w-full flex-wrap items-start justify-start p-5">
         {loading && (
-          <div className="flex items-center justify-center p-5 w-full">
+          <div className="flex w-full items-center justify-center p-5">
             <Loader />
           </div>
         )}
         {!loading && products.length === 0 ? (
-          <div className="flex items-center justify-center p-5 w-full">
+          <div className="flex w-full items-center justify-center p-5">
             <EmptyState title="Uh Oh" subtitle="No products!" />
           </div>
         ) : null}
         {!loading &&
           products?.map((product: any) => (
-            <div className="w-[200px] mt-10 cursor-pointer" key={product._id}>
-              <div className="m-2 ">
-                <div className="col-span-1 cursor-pointer group">
+            <div className="mt-10 w-[200px] cursor-pointer" key={product._id}>
+              <div className="m-2">
+                <div className="group col-span-1 cursor-pointer">
                   <div
-                    className="flex flex-col gap-2 w-full"
+                    className="flex w-full flex-col gap-2"
                     // onClick={() => router.push(`/products/1}`)}
                   >
-                    <div className="aspect-square w-full relative overflow-hidden rounded-xl">
+                    <div className="relative aspect-square w-full overflow-hidden rounded-xl">
                       <Image
                         fill
-                        className="object-cover h-full w-full group-hover:scale-110 transition"
+                        className="h-full w-full object-cover transition group-hover:scale-110"
                         src={product?.imageUrl}
                         alt="Listing"
                       />
-                      <div className=" absolute top-3 right-3">
+                      <div className="absolute top-3 right-3">
                         {/* <HeartButton
                 listingId={item.id}
                 // currentUser={currentUser}
               /> */}
                       </div>
                     </div>
-                    <div className="font-semibold text-lg overflow-hidden truncate w-36">
+                    <div className="w-36 overflow-hidden truncate font-semibold text-lg">
                       {product.name}
                     </div>
-                    <div className="font-light text-neutral-500 overflow-hidden truncate w-36">
+                    <div className="w-36 overflow-hidden truncate font-light text-neutral-500">
                       {product.desc}
                     </div>
                     <div className="flex flex-row items-center gap-1">
@@ -162,7 +160,7 @@ const Products = () => {
                       {/* <div className="font-light">night</div> */}
                     </div>
                   </div>
-                  <div className="flex flex-col gap-2 w-full">
+                  <div className="flex w-full flex-col gap-2">
                     <Button
                       className=""
                       onClick={() => {

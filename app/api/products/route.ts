@@ -1,9 +1,9 @@
-import Product from "@/models/Products";
-import Category from "@/models/Categories";
-import connect from "@/utils/db";
 import { NextResponse } from "next/server";
+import Category from "@/models/Categories";
+import Product from "@/models/Products";
+import connect from "@/utils/db";
 
-export const GET = async (req: Request, res: Response) => {
+export const GET = async (_req: Request, _res: Response) => {
   try {
     await connect();
 
@@ -15,12 +15,12 @@ export const GET = async (req: Request, res: Response) => {
     return NextResponse.json(product, {
       status: 200,
     });
-  } catch (err) {
+  } catch (_err) {
     return new NextResponse("Server Error", { status: 500 });
   }
 };
 
-export const POST = async (req: Request, res: Response) => {
+export const POST = async (req: Request, _res: Response) => {
   await connect();
 
   const { name, desc, imageUrl, link, category } = await req.json();
