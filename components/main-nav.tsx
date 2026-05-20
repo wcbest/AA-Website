@@ -2,8 +2,7 @@
 
 import Cookies from "js-cookie";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
-import { useAuth } from "@/hooks/use-auth-store";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 export function MainNav({
@@ -11,9 +10,6 @@ export function MainNav({
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
-  const _params = useParams();
-  const { onLogin, onLogout, isAuth, data } = useAuth();
-
   const routes = [
     {
       href: `/`,

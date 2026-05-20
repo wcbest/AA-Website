@@ -10,13 +10,13 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth-store";
 
 const Login = () => {
-  const { onLogin, onLogout, isAuth, data } = useAuth();
+  const { onLogin, isAuth } = useAuth();
 
   console.log(isAuth);
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<FieldValues>({
     defaultValues: {
       email: "",

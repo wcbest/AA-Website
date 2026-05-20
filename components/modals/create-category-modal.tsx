@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { useModal } from "@/hooks/use-modal-store";
 
 export const CreateCategoryModal = () => {
-  const { isOpen, onClose, type, data, onRender } = useModal();
+  const { isOpen, onClose, type } = useModal();
   const [_file, _setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [nameInput, setNameInput] = useState("");

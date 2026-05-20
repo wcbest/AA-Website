@@ -23,7 +23,7 @@ import { Separator } from "@/components/ui/separator";
 import { useModal } from "@/hooks/use-modal-store";
 
 const Billboards = () => {
-  const { onOpen, isOpen } = useModal();
+  const { onOpen } = useModal();
   const [loading, setLoading] = useState(false);
   const [delLoading, setDelLoading] = useState(false);
   const [editLoading, setEditLoading] = useState(false);

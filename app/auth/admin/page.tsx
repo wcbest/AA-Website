@@ -12,12 +12,10 @@ import { Heading } from "@/components/heading";
 import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useAuth } from "@/hooks/use-auth-store";
 import { useModal } from "@/hooks/use-modal-store";
 
 const Products = () => {
-  const { onOpen, isOpen, data, render } = useModal();
-  const { isAuth } = useAuth();
+  const { onOpen } = useModal();
   const [loading, setLoading] = useState(false);
   const [delLoading, setDelLoading] = useState(false);
   const [productNo, setProductNo] = useState(0);

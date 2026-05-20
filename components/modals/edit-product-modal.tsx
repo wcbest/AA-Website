@@ -26,7 +26,7 @@ import { useModal } from "@/hooks/use-modal-store";
 import ImageUpload from "../image-upload";
 
 export const EditProductModal = () => {
-  const { isOpen, onClose, type, data, onOpen, render, onRender } = useModal();
+  const { isOpen, onClose, type } = useModal();
   const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [nameInput, setNameInput] = useState("");

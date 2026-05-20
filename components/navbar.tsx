@@ -17,7 +17,7 @@ import { MobileToggle } from "./mobile.toggle";
 import NavMenu from "./nav-menu";
 
 const Navbar = () => {
-  const { onLogin, onLogout, isAuth, data } = useAuth();
+  const { onLogout } = useAuth();
 
   const router = useRouter();
 

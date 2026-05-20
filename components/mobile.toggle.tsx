@@ -5,10 +5,9 @@ import Cookies from "js-cookie";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useAuth } from "@/hooks/use-auth-store";
 import { cn } from "@/lib/utils";
 
 export const MobileToggle: React.FC<any> = () => {
@@ -16,9 +15,6 @@ export const MobileToggle: React.FC<any> = () => {
   const [_loading, setLoading] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const _params = useParams();
-  const { onLogin, onLogout, isAuth, data } = useAuth();
-
   const routes = [
     {
       href: `/`,

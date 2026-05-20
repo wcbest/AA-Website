@@ -18,7 +18,7 @@ import { useModal } from "@/hooks/use-modal-store";
 import ImageUpload from "../image-upload";
 
 export const CreateBillBoardModal = () => {
-  const { isOpen, onClose, type, data, onRender } = useModal();
+  const { isOpen, onClose, type } = useModal();
   const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [textInput, setTextInput] = useState("");
