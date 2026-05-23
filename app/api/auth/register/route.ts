@@ -1,31 +1,29 @@
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
-import User from "@/models/Users";
-import connect from "@/utils/db";
+import { db } from "@/utils/turso";
 
 export const POST = async (req: Request, _res: Response) => {
-  await connect();
   try {
     const { name, email, password } = await req.json();
 
-    // checking if user already exists in the database
-    const emailExist = await User.findOne({ email });
-    if (emailExist) {
+    const existing = await db.execute({
+      sql: "SELECT email FROM users WHERE email = ?",
+      args: [email],
+    });
+
+    if (existing.rows.length > 0) {
       return new NextResponse("User Already exist!!", { status: 400 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const id = crypto.randomUUID();
 
-    const newUser = new User({
-      name,
-      email,
-      password: hashedPassword,
+    await db.execute({
+      sql: "INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)",
+      args: [id, name, email, hashedPassword],
     });
 
-    await newUser.save();
-    return new NextResponse("User has been created", {
-      status: 201,
-    });
+    return new NextResponse("User has been created", { status: 201 });
   } catch (error) {
     console.log("[USER_POST]", error);
     return new NextResponse("Internal error", { status: 500 });

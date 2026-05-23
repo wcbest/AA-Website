@@ -1,24 +1,18 @@
 import { NextResponse } from "next/server";
-import Billboard from "@/models/Billboards";
-import connect from "@/utils/db";
+import { db } from "@/utils/turso";
 
 export const GET = async (_req: Request, _res: Response) => {
   try {
-    await connect();
-
-    const billboards = await Billboard.find({});
-
-    return NextResponse.json(billboards, {
-      status: 200,
-    });
+    const result = await db.execute(
+      "SELECT * FROM billboards ORDER BY created_at DESC",
+    );
+    return NextResponse.json(result.rows, { status: 200 });
   } catch (_err) {
     return new NextResponse("Server Error", { status: 500 });
   }
 };
 
 export const POST = async (req: Request, _res: Response) => {
-  await connect();
-
   const { label, imageUrl } = await req.json();
 
   if (!label) {
@@ -29,19 +23,21 @@ export const POST = async (req: Request, _res: Response) => {
     return new NextResponse("Please add an image", { status: 400 });
   }
 
-  const newBilllboard = new Billboard({
-    label,
-    imageUrl,
-  });
-
-  await newBilllboard.save();
-
   try {
-    return NextResponse.json(newBilllboard, {
-      status: 200,
+    const id = crypto.randomUUID();
+    await db.execute({
+      sql: "INSERT INTO billboards (id, label, image_url) VALUES (?, ?, ?)",
+      args: [id, label, imageUrl],
     });
+
+    const result = await db.execute({
+      sql: "SELECT * FROM billboards WHERE id = ?",
+      args: [id],
+    });
+
+    return NextResponse.json(result.rows[0], { status: 200 });
   } catch (error) {
-    console.log("[BillBOARD_POST]", error);
+    console.log("[BILLBOARD_POST]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 };

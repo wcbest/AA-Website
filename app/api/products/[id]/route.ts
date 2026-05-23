@@ -1,25 +1,49 @@
 import { NextResponse } from "next/server";
-import Product from "@/models/Products";
-import connect from "@/utils/db";
+import { db } from "@/utils/turso";
+
+const PRODUCT_WITH_CATEGORY_SQL = `
+  SELECT p.id, p.name, p.desc, p.image_url, p.link, p.category_id, p.created_at,
+         c.id as cat_id, c.label as cat_label, c.desc as cat_desc
+  FROM products p
+  LEFT JOIN categories c ON p.category_id = c.id
+  WHERE p.id = ?
+`;
+
+function mapRow(row: Record<string, unknown>) {
+  return {
+    id: row.id,
+    name: row.name,
+    desc: row.desc,
+    imageUrl: row.image_url,
+    link: row.link,
+    created_at: row.created_at,
+    category: row.cat_id
+      ? { id: row.cat_id, label: row.cat_label, desc: row.cat_desc }
+      : null,
+  };
+}
 
 export async function GET(
   _req: Request,
   { params }: { params: { id: string } },
 ) {
-  await connect();
-
   const { id } = params;
 
   if (!id) {
     return new NextResponse("product id is required", { status: 400 });
   }
 
-  const product = await Product.findById(id);
-
   try {
-    return NextResponse.json(product, {
-      status: 200,
+    const result = await db.execute({
+      sql: PRODUCT_WITH_CATEGORY_SQL,
+      args: [id],
     });
+
+    if (result.rows.length === 0) {
+      return new NextResponse("Product not found", { status: 404 });
+    }
+
+    return NextResponse.json(mapRow(result.rows[0] as Record<string, unknown>), { status: 200 });
   } catch (_err) {
     return new NextResponse("Server Error", { status: 500 });
   }
@@ -29,21 +53,13 @@ export async function PATCH(
   req: Request,
   { params }: { params: { id: string } },
 ) {
-  await connect();
-
   const { id } = params;
 
   if (!id) {
-    return new NextResponse("billboard id is required", { status: 400 });
+    return new NextResponse("product id is required", { status: 400 });
   }
 
-  const body = await req.json();
-
-  const { name, link, desc, imageUrl, category } = body;
-
-  if (!id) {
-    return new NextResponse("id is required", { status: 400 });
-  }
+  const { name, link, desc, imageUrl, category } = await req.json();
 
   if (!name) {
     return new NextResponse("Please enter product name", { status: 400 });
@@ -61,22 +77,18 @@ export async function PATCH(
     return new NextResponse("Please enter the product link", { status: 400 });
   }
 
-  const updateProduct = await Product.findByIdAndUpdate(
-    { _id: id },
-    {
-      name,
-      link,
-      desc,
-      imageUrl,
-      category,
-    },
-    {
-      new: true,
-    },
-  );
-
   try {
-    return NextResponse.json(updateProduct);
+    await db.execute({
+      sql: "UPDATE products SET name = ?, desc = ?, image_url = ?, link = ?, category_id = ? WHERE id = ?",
+      args: [name, desc, imageUrl, link, category ?? null, id],
+    });
+
+    const result = await db.execute({
+      sql: PRODUCT_WITH_CATEGORY_SQL,
+      args: [id],
+    });
+
+    return NextResponse.json(mapRow(result.rows[0] as Record<string, unknown>));
   } catch (error) {
     console.log("[PRODUCT_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
@@ -87,22 +99,19 @@ export async function DELETE(
   _req: Request,
   { params }: { params: { id: string } },
 ) {
-  await connect();
-
   const { id } = params;
 
   if (!id) {
     return new NextResponse("product id is required", { status: 400 });
   }
 
-  const product = await Product.findById(id);
-
-  if (product.id === id) {
-    await product.deleteOne();
-    return new NextResponse("Product has been deleted", { status: 200 });
-  }
   try {
-    return NextResponse.json(product);
+    await db.execute({
+      sql: "DELETE FROM products WHERE id = ?",
+      args: [id],
+    });
+
+    return new NextResponse("Product has been deleted", { status: 200 });
   } catch (error) {
     console.log("[PRODUCT_DELETE]", error);
     return new NextResponse("Internal error", { status: 500 });

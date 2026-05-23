@@ -1,28 +1,35 @@
 import { NextResponse } from "next/server";
-import Category from "@/models/Categories";
-import Product from "@/models/Products";
-import connect from "@/utils/db";
+import { db } from "@/utils/turso";
 
 export const GET = async (_req: Request, _res: Response) => {
   try {
-    await connect();
+    const result = await db.execute(`
+      SELECT p.id, p.name, p.desc, p.image_url, p.link, p.category_id, p.created_at,
+             c.id as cat_id, c.label as cat_label, c.desc as cat_desc
+      FROM products p
+      LEFT JOIN categories c ON p.category_id = c.id
+      ORDER BY p.created_at DESC
+    `);
 
-    const product = await Product.find({}).populate({
-      path: "categories",
-      model: Category,
-    });
+    const products = result.rows.map((row) => ({
+      id: row.id,
+      name: row.name,
+      desc: row.desc,
+      imageUrl: row.image_url,
+      link: row.link,
+      created_at: row.created_at,
+      category: row.cat_id
+        ? { id: row.cat_id, label: row.cat_label, desc: row.cat_desc }
+        : null,
+    }));
 
-    return NextResponse.json(product, {
-      status: 200,
-    });
+    return NextResponse.json(products, { status: 200 });
   } catch (_err) {
     return new NextResponse("Server Error", { status: 500 });
   }
 };
 
 export const POST = async (req: Request, _res: Response) => {
-  await connect();
-
   const { name, desc, imageUrl, link, category } = await req.json();
 
   if (!name) {
@@ -47,28 +54,38 @@ export const POST = async (req: Request, _res: Response) => {
     });
   }
 
-  const product = new Product({
-    name,
-    desc,
-    imageUrl,
-    link,
-    category,
-  });
-
-  // Add category in the product
-  await product.categories.push(category);
-
-  // Add the category ID to the products array
-  await Category.findByIdAndUpdate(category, {
-    $push: { products: product._id },
-  });
-
-  await product.save();
-
   try {
-    return NextResponse.json(product, {
-      status: 200,
+    const id = crypto.randomUUID();
+    await db.execute({
+      sql: "INSERT INTO products (id, name, desc, image_url, link, category_id) VALUES (?, ?, ?, ?, ?, ?)",
+      args: [id, name, desc, imageUrl, link, category],
     });
+
+    const result = await db.execute({
+      sql: `
+        SELECT p.id, p.name, p.desc, p.image_url, p.link, p.category_id, p.created_at,
+               c.id as cat_id, c.label as cat_label, c.desc as cat_desc
+        FROM products p
+        LEFT JOIN categories c ON p.category_id = c.id
+        WHERE p.id = ?
+      `,
+      args: [id],
+    });
+
+    const row = result.rows[0];
+    const product = {
+      id: row.id,
+      name: row.name,
+      desc: row.desc,
+      imageUrl: row.image_url,
+      link: row.link,
+      created_at: row.created_at,
+      category: row.cat_id
+        ? { id: row.cat_id, label: row.cat_label, desc: row.cat_desc }
+        : null,
+    };
+
+    return NextResponse.json(product, { status: 200 });
   } catch (error) {
     console.log("[PRODUCT_POST]", error);
     return new NextResponse("Internal error", { status: 500 });
