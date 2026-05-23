@@ -80,7 +80,6 @@ export const EditProductModal = () => {
       toast.success("Product updated successfully!!");
       handleClose();
       router.refresh();
-      onRender();
     } catch (error: any) {
       console.error(error.response.data);
       toast.error(error.response.data);

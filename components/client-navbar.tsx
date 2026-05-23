@@ -390,6 +390,20 @@ const ClientNavbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const closeDropdown = () => {
+    if (dropdownRef.current) {
+      gsap.to(dropdownRef.current, {
+        opacity: 0,
+        y: -10,
+        duration: 0.3,
+        ease: "power2.out",
+        onComplete: () => setOpenDropdown(null),
+      });
+    } else {
+      setOpenDropdown(null);
+    }
+  };
+
   const _handleMouseEnter = (item: any) => {
     if (isMobile) return; // ✅ do nothing on mobile
     setOpenDropdown(item.id);
@@ -516,20 +530,6 @@ const ClientNavbar = () => {
       });
     }
   }, [isNavVisible]);
-
-  const closeDropdown = () => {
-    if (dropdownRef.current) {
-      gsap.to(dropdownRef.current, {
-        opacity: 0,
-        y: -10,
-        duration: 0.3,
-        ease: "power2.out",
-        onComplete: () => setOpenDropdown(null),
-      });
-    } else {
-      setOpenDropdown(null);
-    }
-  };
 
   const _openNav = () => {
     setIsOpen(true);

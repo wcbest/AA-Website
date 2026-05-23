@@ -35,7 +35,7 @@ export const CreateCategoryModal = () => {
 
   const isModalOpen = isOpen && type === "createCategory";
 
-  const _router = useRouter();
+  const router = useRouter();
 
   // create category
   const submit = async () => {
@@ -59,7 +59,7 @@ export const CreateCategoryModal = () => {
       setDescInput("");
       setNameInput("");
       handleClose();
-      onRender();
+      router.refresh();
     } catch (error: any) {
       console.error(error.response.data);
       toast.error(error.response.data);

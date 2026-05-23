@@ -53,7 +53,7 @@ export const CreateProductModal = () => {
 
   const isModalOpen = isOpen && type === "createProduct";
 
-  const _router = useRouter();
+  const router = useRouter();
 
   // create product
   const submit = async () => {
@@ -83,7 +83,7 @@ export const CreateProductModal = () => {
       setCategoryInput("");
       setFile("");
       handleClose();
-      onRender();
+      router.refresh();
     } catch (error: any) {
       console.error(error.response.data);
       toast.error(error.response.data);
