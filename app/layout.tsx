@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <ReactLenis root>
-        <body className={(cn(), "w-full")}>
+        <body className={cn("w-full")}>
           {children}
 
           <Analytics />
