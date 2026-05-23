@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import { Agentation } from "agentation";
 import type { Metadata } from "next";
 import { ModalProvider } from "@/components/providers/modal-provider";
 import { ReactLenis } from "@/hooks/lenis";
@@ -22,6 +23,9 @@ export default function RootLayout({
           {children}
 
           <Analytics />
+          {process.env.NODE_ENV === "development" && (
+            <Agentation endpoint="http://localhost:4747" />
+          )}
         </body>
         <ModalProvider />
       </ReactLenis>

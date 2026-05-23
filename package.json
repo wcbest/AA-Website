@@ -55,6 +55,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "agentation": "^3.0.2",
     "autoprefixer": "^10.0.1",
     "dotenv": "^17.4.2",
     "eslint": "^8",
