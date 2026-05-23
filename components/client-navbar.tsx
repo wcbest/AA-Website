@@ -996,7 +996,7 @@ const ClientNavbar = () => {
             height={103}
             alt="AAlogo"
             src="/new_images/image 14.svg"
-            className="ml-2 h-20 w-20 md:-mr-5 md:h-[55px] md:w-[197px]"
+            className="ml-2 h-24 w-24 md:-mr-5 md:h-[65px] md:w-[230px]"
           />
         </Link>
 
@@ -1036,7 +1036,7 @@ const ClientNavbar = () => {
                       : "invisible translate-y-2 opacity-0",
                   )}
                 >
-                  <div className="grid grid-cols-1 gap-3">
+                  <div className="grid grid-cols-1 gap-1">
                     {item.subItems?.map((child) => (
                       <Link
                         key={child.title}
@@ -1062,7 +1062,7 @@ const ClientNavbar = () => {
           href="https://forms.fillout.com/t/oEtePaNuxSus"
           target="_blank"
           // variant="outline"
-          className="hidden w-fit rounded-full border-2 border-[#fff] bg-[#026B20] px-8 py-2 text-[#fff] hover:bg-[#026B20] hover:text-white md:flex"
+          className="hidden w-fit rounded-full border-2 border-[#fff] bg-gradient-to-b from-[#026B20] to-[#004714] px-8 py-2 text-[#fff] hover:opacity-90 md:flex"
           rel="noopener"
         >
           Contact Us
@@ -1118,7 +1118,7 @@ const ClientNavbar = () => {
           href="https://forms.fillout.com/t/oEtePaNuxSus"
           target="_blank"
           // variant="outline"
-          className="hidden w-fit rounded-full border-2 border-[#fff] bg-[#026B20] px-8 py-2 text-[#fff] hover:bg-[#026B20] hover:text-white md:flex"
+          className="hidden w-fit rounded-full border-2 border-[#fff] bg-gradient-to-b from-[#026B20] to-[#004714] px-8 py-2 text-[#fff] hover:opacity-90 md:flex"
           rel="noopener"
         >
           Contact Us
