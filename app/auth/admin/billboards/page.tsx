@@ -166,7 +166,7 @@ const Billboards = () => {
             title={`Billboards (${billboards.length})`}
             description="Manage billboards on your homepage"
           />
-          <Button onClick={() => onOpen("createBillboard")}>
+          <Button onClick={() => onOpen("createBillboard", { onSuccess: fetchBillboards })}>
             <Plus className="mr-2 h-4 w-4" /> Add New Billboard
           </Button>
         </div>

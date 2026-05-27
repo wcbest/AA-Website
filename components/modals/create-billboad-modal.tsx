@@ -18,7 +18,7 @@ import { useModal } from "@/hooks/use-modal-store";
 import ImageUpload from "../image-upload";
 
 export const CreateBillBoardModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
   const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
@@ -53,7 +53,7 @@ export const CreateBillBoardModal = () => {
       setTextInput("");
       setFile("");
       handleClose();
-      router.refresh();
+      data?.onSuccess?.();
     } catch (error: any) {
       console.error(error.response.data);
       toast.error(error.response.data);

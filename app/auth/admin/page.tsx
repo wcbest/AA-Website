@@ -129,7 +129,7 @@ const Products = () => {
           <Button
             size="sm"
             variant="outline"
-            onClick={() => onOpen("editProduct", { product: row.original })}
+            onClick={() => onOpen("editProduct", { product: row.original, onSuccess: fetchProducts })}
           >
             <Pencil className="h-3.5 w-3.5" />
           </Button>
@@ -161,7 +161,7 @@ const Products = () => {
             title={`Products (${products.length})`}
             description="Manage all products on the app"
           />
-          <Button onClick={() => onOpen("createProduct")}>
+          <Button onClick={() => onOpen("createProduct", { onSuccess: fetchProducts })}>
             <Plus className="mr-2 h-4 w-4" /> Add New Product
           </Button>
         </div>

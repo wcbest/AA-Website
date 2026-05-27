@@ -156,7 +156,7 @@ const Categories = () => {
             title={`Categories (${categories.length})`}
             description="Manage categories on your app"
           />
-          <Button onClick={() => onOpen("createCategory")}>
+          <Button onClick={() => onOpen("createCategory", { onSuccess: fetchCategories })}>
             <Plus className="mr-2 h-4 w-4" /> Add Category
           </Button>
         </div>
