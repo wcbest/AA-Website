@@ -1,27 +1,23 @@
 import bcrypt from "bcrypt";
+import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
-import { db } from "@/utils/turso";
+import { db } from "@/db";
+import { users } from "@/db/schema";
 
-export const POST = async (req: Request, _res: Response) => {
+export const POST = async (req: Request) => {
   try {
     const { name, email, password } = await req.json();
 
-    const existing = await db.execute({
-      sql: "SELECT email FROM users WHERE email = ?",
-      args: [email],
-    });
+    const existing = await db.select({ email: users.email }).from(users).where(eq(users.email, email)).get();
 
-    if (existing.rows.length > 0) {
+    if (existing) {
       return new NextResponse("User Already exist!!", { status: 400 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const id = crypto.randomUUID();
 
-    await db.execute({
-      sql: "INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)",
-      args: [id, name, email, hashedPassword],
-    });
+    await db.insert(users).values({ id, name, email, password: hashedPassword });
 
     return new NextResponse("User has been created", { status: 201 });
   } catch (error) {

@@ -39,7 +39,7 @@ export const EditListingModal = () => {
             price: listing.price ?? undefined,
             type: listing.type,
             location: listing.location ?? "",
-            image_url: listing.image_url ?? "",
+            image_url: listing.imageUrl ?? "",
             published: listing.published === 1 || listing.published === true,
           }}
           onSubmit={onSubmit}

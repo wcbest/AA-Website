@@ -1,32 +1,26 @@
 import bcrypt from "bcrypt";
+import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
-import { db } from "@/utils/turso";
+import { db } from "@/db";
+import { users } from "@/db/schema";
 
-export const POST = async (req: Request, _res: Response) => {
+export const POST = async (req: Request) => {
   const { email, password } = await req.json();
 
-  const result = await db.execute({
-    sql: "SELECT id, name, email, password FROM users WHERE email = ?",
-    args: [email],
-  });
-
-  const user = result.rows[0];
+  const user = await db.select().from(users).where(eq(users.email, email)).get();
 
   if (!user) {
     return new NextResponse("Invalid Email or Password", { status: 400 });
   }
 
-  const validPassword = await bcrypt.compare(
-    password,
-    user.password as string,
-  );
+  const validPassword = await bcrypt.compare(password, user.password);
 
   if (!validPassword) {
     return new NextResponse("Invalid Email or Password", { status: 400 });
   }
 
   try {
-    const { password: _pw, ...safeUser } = user as Record<string, unknown>;
+    const { password: _pw, ...safeUser } = user;
     return NextResponse.json(safeUser, { status: 200 });
   } catch (error) {
     console.log("[USER_POST]", error);

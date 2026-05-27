@@ -33,7 +33,7 @@ interface Category {
   id: string;
   label: string;
   desc: string | null;
-  created_at: string;
+  createdAt: string;
 }
 
 const Categories = () => {
@@ -109,11 +109,11 @@ const Categories = () => {
       ),
     },
     {
-      accessorKey: "created_at",
+      accessorKey: "createdAt",
       header: "Created",
       cell: ({ row }) => (
         <span className="text-sm text-zinc-500">
-          {new Date(row.getValue("created_at")).toLocaleDateString()}
+          {new Date(row.getValue("createdAt")).toLocaleDateString()}
         </span>
       ),
     },

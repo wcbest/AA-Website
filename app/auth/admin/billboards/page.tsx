@@ -34,8 +34,8 @@ import { useModal } from "@/hooks/use-modal-store";
 interface Billboard {
   id: string;
   label: string;
-  image_url: string;
-  created_at: string;
+  imageUrl: string;
+  createdAt: string;
 }
 
 const Billboards = () => {
@@ -94,7 +94,7 @@ const Billboards = () => {
   const openEdit = async (billboard: Billboard) => {
     setEditId(billboard.id);
     setLabelInput(billboard.label);
-    setFile(billboard.image_url);
+    setFile(billboard.imageUrl);
   };
 
   useEffect(() => {
@@ -104,13 +104,13 @@ const Billboards = () => {
 
   const columns: ColumnDef<Billboard>[] = [
     {
-      accessorKey: "image_url",
+      accessorKey: "imageUrl",
       header: "Image",
       cell: ({ row }) => (
         <div className="relative h-10 w-16 overflow-hidden rounded-md">
           <Image
             fill
-            src={row.getValue("image_url")}
+            src={row.getValue("imageUrl")}
             alt={row.original.label}
             className="object-cover"
             sizes="64px"
@@ -126,11 +126,11 @@ const Billboards = () => {
       ),
     },
     {
-      accessorKey: "created_at",
+      accessorKey: "createdAt",
       header: "Created",
       cell: ({ row }) => (
         <span className="text-sm text-zinc-500">
-          {new Date(row.getValue("created_at")).toLocaleDateString()}
+          {new Date(row.getValue("createdAt")).toLocaleDateString()}
         </span>
       ),
     },

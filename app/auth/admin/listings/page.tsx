@@ -36,9 +36,9 @@ interface Listing {
   price: number | null;
   type: string;
   location: string | null;
-  image_url: string | null;
+  imageUrl: string | null;
   published: number;
-  created_at: string;
+  createdAt: string;
 }
 
 const ListingsPage = () => {
@@ -94,10 +94,10 @@ const ListingsPage = () => {
 
   const columns: ColumnDef<Listing>[] = [
     {
-      accessorKey: "image_url",
+      accessorKey: "imageUrl",
       header: "Image",
       cell: ({ row }) => {
-        const url = row.getValue<string | null>("image_url");
+        const url = row.getValue<string | null>("imageUrl");
         return url ? (
           <div className="relative h-10 w-10 overflow-hidden rounded-md">
             <Image fill src={url} alt={row.original.title} className="object-cover" sizes="40px" />

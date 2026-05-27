@@ -32,10 +32,9 @@ interface Product {
   id: string;
   name: string;
   desc: string;
-  image_url: string;
+  imageUrl: string;
   link: string;
-  category_id: string | null;
-  cat_label: string | null;
+  category: { id: string | null; label: string | null; desc: string | null } | null;
 }
 
 const Products = () => {
@@ -79,13 +78,13 @@ const Products = () => {
 
   const columns: ColumnDef<Product>[] = [
     {
-      accessorKey: "image_url",
+      accessorKey: "imageUrl",
       header: "Image",
       cell: ({ row }) => (
         <div className="relative h-10 w-10 overflow-hidden rounded-md">
           <Image
             fill
-            src={row.getValue("image_url")}
+            src={row.getValue("imageUrl")}
             alt={row.original.name}
             className="object-cover"
             sizes="40px"
@@ -106,11 +105,11 @@ const Products = () => {
       ),
     },
     {
-      accessorKey: "cat_label",
+      id: "category",
       header: "Category",
       cell: ({ row }) => (
         <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600">
-          {row.getValue<string | null>("cat_label") ?? "—"}
+          {row.original.category?.label ?? "—"}
         </span>
       ),
     },
