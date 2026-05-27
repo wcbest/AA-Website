@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -19,7 +18,6 @@ import ImageUpload from "../image-upload";
 
 export const CreateBillBoardModal = () => {
   const { isOpen, onClose, type, data } = useModal();
-  const router = useRouter();
   const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [textInput, setTextInput] = useState("");
@@ -30,7 +28,6 @@ export const CreateBillBoardModal = () => {
 
   const isModalOpen = isOpen && type === "createBillboard";
 
-  const _router = useRouter();
 
   const submit = async () => {
     try {

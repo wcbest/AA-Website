@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { Toaster, toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -53,7 +52,6 @@ export const CreateProductModal = () => {
 
   const isModalOpen = isOpen && type === "createProduct";
 
-  const router = useRouter();
 
   // create product
   const submit = async () => {

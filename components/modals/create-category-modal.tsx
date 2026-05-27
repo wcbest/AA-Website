@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -35,7 +34,6 @@ export const CreateCategoryModal = () => {
 
   const isModalOpen = isOpen && type === "createCategory";
 
-  const router = useRouter();
 
   // create category
   const submit = async () => {
