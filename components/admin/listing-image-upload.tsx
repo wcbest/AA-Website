@@ -44,7 +44,7 @@ export function ListingImageUpload<T extends FieldValues>({
             },
             (err) => {
               console.error(err);
-              setUploading("Upload failed");
+              setUploading("");
             },
             () => {
               uploadTask.snapshot.ref.getDownloadURL().then((url) => {
