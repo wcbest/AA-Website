@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  type ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import axios from "axios";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -12,6 +19,14 @@ import { Heading } from "@/components/heading";
 import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useModal } from "@/hooks/use-modal-store";
 
 interface Listing {
@@ -63,7 +78,96 @@ const ListingsPage = () => {
 
   useEffect(() => {
     fetchListings();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const columns: ColumnDef<Listing>[] = [
+    {
+      accessorKey: "image_url",
+      header: "Image",
+      cell: ({ row }) => {
+        const url = row.getValue<string | null>("image_url");
+        return url ? (
+          <div className="relative h-10 w-10 overflow-hidden rounded-md">
+            <Image fill src={url} alt={row.original.title} className="object-cover" sizes="40px" />
+          </div>
+        ) : (
+          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-zinc-100 text-[10px] text-zinc-400">
+            None
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: "title",
+      header: "Title",
+      cell: ({ row }) => (
+        <div>
+          <p className="font-medium text-zinc-900">{row.original.title}</p>
+          {row.original.description && (
+            <p className="max-w-[220px] truncate text-xs text-zinc-400">{row.original.description}</p>
+          )}
+        </div>
+      ),
+    },
+    {
+      accessorKey: "type",
+      header: "Type",
+      cell: ({ row }) => (
+        <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600">
+          {row.getValue("type")}
+        </span>
+      ),
+    },
+    {
+      accessorKey: "price",
+      header: "Price",
+      cell: ({ row }) => {
+        const price = row.getValue<number | null>("price");
+        return <span className="text-zinc-600">{price != null ? `$${price.toLocaleString()}` : "—"}</span>;
+      },
+    },
+    {
+      accessorKey: "location",
+      header: "Location",
+      cell: ({ row }) => (
+        <span className="text-zinc-600">{row.getValue<string | null>("location") ?? "—"}</span>
+      ),
+    },
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }) => (
+        <div className="flex gap-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => {
+              onOpen("editListing", { listing: row.original });
+              router.refresh();
+            }}
+          >
+            <Pencil className="h-3.5 w-3.5" />
+          </Button>
+          <Button
+            size="sm"
+            variant="destructive"
+            onClick={() => setDeleteId(row.original.id)}
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
+  const table = useReactTable({
+    data: listings,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: { pagination: { pageSize: 10 } },
+  });
 
   return (
     <div className="flex-col">
@@ -96,83 +200,58 @@ const ListingsPage = () => {
         )}
 
         {!loading && listings.length > 0 && (
-          <div className="overflow-x-auto rounded-lg border">
-            <table className="w-full text-sm">
-              <thead className="bg-zinc-50 text-left text-zinc-500">
-                <tr>
-                  <th className="px-4 py-3 font-medium">Image</th>
-                  <th className="px-4 py-3 font-medium">Title</th>
-                  <th className="px-4 py-3 font-medium">Type</th>
-                  <th className="px-4 py-3 font-medium">Price</th>
-                  <th className="px-4 py-3 font-medium">Location</th>
-                  <th className="px-4 py-3 font-medium">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-zinc-100">
-                {listings.map((listing) => (
-                  <tr key={listing.id} className="bg-white hover:bg-zinc-50">
-                    <td className="px-4 py-3">
-                      {listing.image_url ? (
-                        <div className="relative h-12 w-12 overflow-hidden rounded-md">
-                          <Image
-                            fill
-                            src={listing.image_url}
-                            alt={listing.title}
-                            className="object-cover"
-                            sizes="48px"
-                          />
-                        </div>
-                      ) : (
-                        <div className="flex h-12 w-12 items-center justify-center rounded-md bg-zinc-100 text-xs text-zinc-400">
-                          No img
-                        </div>
-                      )}
-                    </td>
-                    <td className="max-w-[200px] px-4 py-3">
-                      <p className="truncate font-medium text-zinc-900">{listing.title}</p>
-                      {listing.description && (
-                        <p className="mt-0.5 truncate text-zinc-400">{listing.description}</p>
-                      )}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600">
-                        {listing.type}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-zinc-600">
-                      {listing.price != null
-                        ? `$${listing.price.toLocaleString()}`
-                        : "—"}
-                    </td>
-                    <td className="px-4 py-3 text-zinc-600">
-                      {listing.location ?? "—"}
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            onOpen("editListing", { listing });
-                            router.refresh();
-                          }}
-                        >
-                          <Pencil className="h-3.5 w-3.5" />
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="destructive"
-                          onClick={() => setDeleteId(listing.id)}
-                        >
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </Button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <>
+            <div className="rounded-lg border">
+              <Table>
+                <TableHeader>
+                  {table.getHeaderGroups().map((headerGroup) => (
+                    <TableRow key={headerGroup.id}>
+                      {headerGroup.headers.map((header) => (
+                        <TableHead key={header.id}>
+                          {flexRender(header.column.columnDef.header, header.getContext())}
+                        </TableHead>
+                      ))}
+                    </TableRow>
+                  ))}
+                </TableHeader>
+                <TableBody>
+                  {table.getRowModel().rows.map((row) => (
+                    <TableRow key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+
+            <div className="mt-4 flex items-center justify-between text-sm text-zinc-500">
+              <span>
+                Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+              </span>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => table.previousPage()}
+                  disabled={!table.getCanPreviousPage()}
+                >
+                  Previous
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => table.nextPage()}
+                  disabled={!table.getCanNextPage()}
+                >
+                  Next
+                </Button>
+              </div>
+            </div>
+          </>
         )}
       </div>
 
