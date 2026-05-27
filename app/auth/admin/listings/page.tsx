@@ -82,7 +82,7 @@ const ListingsPage = () => {
 
       <Separator />
 
-      <div className="p-8">
+      <div className="min-h-[60vh] p-8">
         {loading && (
           <div className="flex w-full items-center justify-center py-10">
             <Loader />
