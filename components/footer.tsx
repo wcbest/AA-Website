@@ -175,6 +175,7 @@ const Footer = () => {
         <div className="flex items-center gap-6">
           <FooterLink>Privacy Policy</FooterLink>
           <FooterLink>Terms of Use</FooterLink>
+          <FooterLink href="/auth/admin" className="opacity-40 hover:opacity-100">Admin</FooterLink>
         </div>
       </div>
     </footer>

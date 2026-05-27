@@ -4,7 +4,9 @@ export type ModalType =
   | "createBillboard"
   | "createProduct"
   | "editProduct"
-  | "createCategory";
+  | "createCategory"
+  | "createListing"
+  | "editListing";
 
 interface ModalStore {
   type: ModalType | null;
