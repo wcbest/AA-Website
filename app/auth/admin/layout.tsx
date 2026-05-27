@@ -65,12 +65,14 @@ function AdminLoginGate({ onSuccess }: { onSuccess: () => void }) {
             type="email"
             placeholder="Email address"
             autoComplete="email"
+            className="text-zinc-900"
             {...register("email", { required: true })}
           />
           <Input
             type="password"
             placeholder="Password"
             autoComplete="current-password"
+            className="text-zinc-900"
             {...register("password", { required: true })}
           />
 
