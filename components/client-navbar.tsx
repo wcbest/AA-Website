@@ -45,9 +45,9 @@ export const navigationItems: NavItem[] = [
     href: "/listings",
     isDropdown: true,
     subItems: [
-      { title: "Businesses", href: "#" },
-      { title: "Real Estate", href: "#" },
-      { title: "Featured Listings", href: "#" },
+      { title: "All Listings", href: "/listings" },
+      { title: "Businesses", href: "/listings?type=Business" },
+      { title: "Real Estate", href: "/listings?type=Real+Estate" },
     ],
   },
   {

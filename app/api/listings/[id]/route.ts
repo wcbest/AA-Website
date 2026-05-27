@@ -1,7 +1,23 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { listings } from "@/db/schema";
+
+export const GET = async (_req: Request, { params }: { params: { id: string } }) => {
+  try {
+    const { id } = params;
+    const row = await db.select().from(listings).where(and(eq(listings.id, id), eq(listings.published, 1))).get();
+
+    if (!row) {
+      return new NextResponse("Listing not found", { status: 404 });
+    }
+
+    return NextResponse.json(row, { status: 200 });
+  } catch (error) {
+    console.log("[LISTING_GET]", error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
+};
 
 export const PUT = async (req: Request, { params }: { params: { id: string } }) => {
   try {

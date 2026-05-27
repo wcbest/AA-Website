@@ -1,11 +1,16 @@
-import { desc } from "drizzle-orm";
-import { NextResponse } from "next/server";
+import { desc, eq } from "drizzle-orm";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { listings } from "@/db/schema";
 
-export const GET = async () => {
+export const GET = async (req: NextRequest) => {
   try {
-    const rows = await db.select().from(listings).orderBy(desc(listings.createdAt));
+    const publishedOnly = req.nextUrl.searchParams.get("published") === "true";
+    const rows = await db
+      .select()
+      .from(listings)
+      .where(publishedOnly ? eq(listings.published, 1) : undefined)
+      .orderBy(desc(listings.createdAt));
     return NextResponse.json(rows, { status: 200 });
   } catch (error) {
     console.log("[LISTINGS_GET]", error);
