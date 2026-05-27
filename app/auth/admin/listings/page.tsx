@@ -10,7 +10,6 @@ import {
 import axios from "axios";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { AlertModal } from "@/components/alert";
@@ -42,7 +41,6 @@ interface Listing {
 
 const ListingsPage = () => {
   const { onOpen } = useModal();
-  const router = useRouter();
 
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(false);
@@ -142,10 +140,7 @@ const ListingsPage = () => {
           <Button
             size="sm"
             variant="outline"
-            onClick={() => {
-              onOpen("editListing", { listing: row.original });
-              router.refresh();
-            }}
+            onClick={() => onOpen("editListing", { listing: row.original, onSuccess: fetchListings })}
           >
             <Pencil className="h-3.5 w-3.5" />
           </Button>
@@ -177,7 +172,7 @@ const ListingsPage = () => {
             title={`Listings (${listings.length})`}
             description="Manage business and real estate listings"
           />
-          <Button onClick={() => onOpen("createListing")}>
+          <Button onClick={() => onOpen("createListing", { onSuccess: fetchListings })}>
             <Plus className="mr-2 h-4 w-4" />
             Add listing
           </Button>

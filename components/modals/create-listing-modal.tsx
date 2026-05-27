@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { ListingForm, type ListingFormValues } from "@/components/admin/listing-form";
 import {
@@ -13,8 +12,7 @@ import {
 import { useModal } from "@/hooks/use-modal-store";
 
 export const CreateListingModal = () => {
-  const { isOpen, type, onClose } = useModal();
-  const router = useRouter();
+  const { isOpen, type, data, onClose } = useModal();
 
   const isModalOpen = isOpen && type === "createListing";
 
@@ -22,7 +20,7 @@ export const CreateListingModal = () => {
     await axios.post("/api/listings", values);
     toast.success("Listing created successfully");
     onClose();
-    router.refresh();
+    data?.onSuccess?.();
   };
 
   return (

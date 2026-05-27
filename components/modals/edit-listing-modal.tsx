@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { ListingForm, type ListingFormValues } from "@/components/admin/listing-form";
 import {
@@ -23,7 +22,7 @@ export const EditListingModal = () => {
     await axios.put(`/api/listings/${listing.id}`, values);
     toast.success("Listing updated successfully");
     onClose();
-    router.refresh();
+    data?.onSuccess?.();
   };
 
   if (!listing) return null;
