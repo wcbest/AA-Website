@@ -129,7 +129,8 @@ const Billboards = () => {
 
   useEffect(() => {
     getCategories();
-  }, [getCategories]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
