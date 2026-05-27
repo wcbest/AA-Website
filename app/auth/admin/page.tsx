@@ -128,7 +128,7 @@ const Products = () => {
         <div className="flex gap-2">
           <Button
             size="sm"
-            variant="outline"
+            variant="secondary"
             onClick={() => onOpen("editProduct", { product: row.original, onSuccess: fetchProducts })}
           >
             <Pencil className="h-3.5 w-3.5" />

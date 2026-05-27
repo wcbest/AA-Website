@@ -139,7 +139,7 @@ const Billboards = () => {
       header: "Actions",
       cell: ({ row }) => (
         <div className="flex gap-2">
-          <Button size="sm" variant="outline" onClick={() => openEdit(row.original)}>
+          <Button size="sm" variant="secondary" onClick={() => openEdit(row.original)}>
             <Pencil className="h-3.5 w-3.5" />
           </Button>
           <Button size="sm" variant="destructive" onClick={() => setDeleteId(row.original.id)}>

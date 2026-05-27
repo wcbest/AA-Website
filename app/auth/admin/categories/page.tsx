@@ -124,7 +124,7 @@ const Categories = () => {
         <div className="flex gap-2">
           <Button
             size="sm"
-            variant="outline"
+            variant="secondary"
             onClick={() => {
               setEditId(row.original.id);
               setLabelInput(row.original.label);
