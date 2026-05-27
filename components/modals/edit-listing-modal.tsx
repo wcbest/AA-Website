@@ -13,7 +13,6 @@ import { useModal } from "@/hooks/use-modal-store";
 
 export const EditListingModal = () => {
   const { isOpen, type, data, onClose } = useModal();
-  const router = useRouter();
 
   const isModalOpen = isOpen && type === "editListing";
   const listing = data?.listing;
