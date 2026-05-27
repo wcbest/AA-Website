@@ -40,6 +40,7 @@ export const EditListingModal = () => {
             type: listing.type,
             location: listing.location ?? "",
             image_url: listing.image_url ?? "",
+            published: listing.published === 1 || listing.published === true,
           }}
           onSubmit={onSubmit}
           submitLabel="Save changes"

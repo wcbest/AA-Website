@@ -26,6 +26,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Switch } from "@/components/ui/switch";
 import { useModal } from "@/hooks/use-modal-store";
 
 interface Listing {
@@ -36,6 +37,7 @@ interface Listing {
   type: string;
   location: string | null;
   image_url: string | null;
+  published: number;
   created_at: string;
 }
 
@@ -71,6 +73,17 @@ const ListingsPage = () => {
       toast.error("Failed to delete listing");
     } finally {
       setDeleting(false);
+    }
+  };
+
+  const togglePublished = async (id: string, current: number) => {
+    try {
+      await axios.patch(`/api/listings/${id}`, { published: !current });
+      setListings((prev) =>
+        prev.map((l) => (l.id === id ? { ...l, published: current ? 0 : 1 } : l)),
+      );
+    } catch {
+      toast.error("Failed to update publish state");
     }
   };
 
@@ -130,6 +143,16 @@ const ListingsPage = () => {
       header: "Location",
       cell: ({ row }) => (
         <span className="text-zinc-600">{row.getValue<string | null>("location") ?? "—"}</span>
+      ),
+    },
+    {
+      accessorKey: "published",
+      header: "Published",
+      cell: ({ row }) => (
+        <Switch
+          checked={row.original.published === 1}
+          onCheckedChange={() => togglePublished(row.original.id, row.original.published)}
+        />
       ),
     },
     {

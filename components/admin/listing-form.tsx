@@ -2,9 +2,10 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { FormField } from "./form-field";
 import { FormSelect } from "./form-select";
@@ -19,6 +20,7 @@ export const listingSchema = z.object({
   }),
   location: z.string().optional(),
   image_url: z.string().optional(),
+  published: z.boolean().default(false),
 });
 
 export type ListingFormValues = z.infer<typeof listingSchema>;
@@ -48,6 +50,7 @@ export function ListingForm({
       type: undefined,
       location: "",
       image_url: "",
+      published: false,
       ...defaultValues,
     },
   });
@@ -90,6 +93,20 @@ export function ListingForm({
       </div>
 
       <FormField name="location" control={form.control} label="Location" placeholder="City, Country" />
+
+      <Controller
+        name="published"
+        control={form.control}
+        render={({ field }) => (
+          <div className="flex items-center justify-between rounded-lg border p-3">
+            <div>
+              <p className="font-medium text-sm text-zinc-700">Publish listing</p>
+              <p className="text-xs text-zinc-400">Visible on the public listings page</p>
+            </div>
+            <Switch checked={field.value} onCheckedChange={field.onChange} />
+          </div>
+        )}
+      />
 
       <Button type="submit" disabled={isSubmitting} className="mt-2 w-full">
         {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

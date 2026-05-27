@@ -6,7 +6,7 @@ export const PUT = async (
   { params }: { params: { id: string } },
 ) => {
   try {
-    const { title, description, price, type, location, image_url } =
+    const { title, description, price, type, location, image_url, published } =
       await req.json();
     const { id } = params;
 
@@ -15,12 +15,12 @@ export const PUT = async (
     }
 
     await db.execute({
-      sql: "UPDATE listings SET title = ?, description = ?, price = ?, type = ?, location = ?, image_url = ? WHERE id = ?",
-      args: [title, description ?? null, price ?? null, type, location ?? null, image_url ?? null, id],
+      sql: "UPDATE listings SET title = ?, description = ?, price = ?, type = ?, location = ?, image_url = ?, published = ? WHERE id = ?",
+      args: [title, description ?? null, price ?? null, type, location ?? null, image_url ?? null, published ? 1 : 0, id],
     });
 
     const result = await db.execute({
-      sql: "SELECT id, title, description, price, type, location, image_url, created_at FROM listings WHERE id = ?",
+      sql: "SELECT id, title, description, price, type, location, image_url, published, created_at FROM listings WHERE id = ?",
       args: [id],
     });
 
@@ -31,6 +31,26 @@ export const PUT = async (
     return NextResponse.json(result.rows[0], { status: 200 });
   } catch (error) {
     console.log("[LISTING_PUT]", error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
+};
+
+export const PATCH = async (
+  req: Request,
+  { params }: { params: { id: string } },
+) => {
+  try {
+    const { published } = await req.json();
+    const { id } = params;
+
+    await db.execute({
+      sql: "UPDATE listings SET published = ? WHERE id = ?",
+      args: [published ? 1 : 0, id],
+    });
+
+    return new NextResponse(null, { status: 204 });
+  } catch (error) {
+    console.log("[LISTING_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 };
