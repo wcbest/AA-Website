@@ -1,6 +1,5 @@
 "use client";
 
-import Cookies from "js-cookie";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -26,33 +25,9 @@ export function MainNav({
       label: "About Us",
       active: pathname === `/about`,
     },
-    // {
-    //   href: `/contact`,
-    //   label: "Contact Us",
-    //   active: pathname === `/contact`,
-    // },
-    {
-      href: `/auth/admin/billboards`,
-      label: "Manage Billboards",
-      active: pathname === `/auth/admin/billboards`,
-    },
-    {
-      href: `/auth/admin/`,
-      label: "Manage Products",
-      active: pathname === `/auth/admin/`,
-    },
-    {
-      href: `/auth/admin/categories`,
-      label: "Manage Categories",
-      active: pathname === `/auth/admin/categories`,
-    },
   ];
 
-  const status = Cookies.get("isAuth");
-
-  const filteredRoutes = status
-    ? routes // If authenticated, include all routes
-    : routes.filter((route) => !route.href.startsWith("/auth/admin"));
+  const filteredRoutes = routes;
 
   return (
     <nav

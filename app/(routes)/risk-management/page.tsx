@@ -81,7 +81,7 @@ export default function BusinessBrokeragePage() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="pt-40"
+        className="pt-20"
       >
         <Breadcrumbs />
         <HeroSection title="Risk Management" img="/new_images/image 16.png" />

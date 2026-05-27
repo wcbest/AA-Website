@@ -2,9 +2,8 @@
 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { useModal } from "@/hooks/use-modal-store";
 
 export const CreateCategoryModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, type, data } = useModal();
   const [_file, _setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [nameInput, setNameInput] = useState("");
@@ -35,7 +34,6 @@ export const CreateCategoryModal = () => {
 
   const isModalOpen = isOpen && type === "createCategory";
 
-  const router = useRouter();
 
   // create category
   const submit = async () => {
@@ -59,7 +57,7 @@ export const CreateCategoryModal = () => {
       setDescInput("");
       setNameInput("");
       handleClose();
-      router.refresh();
+      data?.onSuccess?.();
     } catch (error: any) {
       console.error(error.response.data);
       toast.error(error.response.data);
@@ -74,7 +72,6 @@ export const CreateCategoryModal = () => {
 
   return (
     <>
-      <Toaster position="top-center" />
       <Dialog open={isModalOpen} onOpenChange={handleClose}>
         <DialogContent className="overflow-hidden bg-white p-0 text-black">
           <DialogHeader className="px-6 pt-8">

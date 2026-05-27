@@ -1,14 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
+import { FooterLink } from "@/components/base/footer-link";
 
 const Footer = () => {
   return (
     <footer className="w-full bg-[#151515] font-light text-white" id="footer">
-      {/* Main content */}
       <div className="mx-auto grid max-w-[90rem] grid-cols-2 gap-8 px-4 py-12 pt-[76px] sm:grid-cols-3 md:grid-cols-6 md:gap-10 md:px-8">
-        {/* Social */}
+        {/* Brand + contact */}
         <div className="col-span-2 space-y-6 sm:col-span-3 md:col-span-2">
-          <Link href={"/"} className="">
+          <FooterLink href="/">
             <Image
               width={212}
               height={103}
@@ -16,162 +15,82 @@ const Footer = () => {
               src="/new_images/Copy of AA Slides v5 Final 1.svg"
               className="h-20 w-20 md:h-[95px] md:w-[197px]"
             />
-          </Link>
+          </FooterLink>
           <div className="space-y-2 text-[15px]">
-            {/* <h3 className="text-xl font-semibold text-[#cc9f53] mb-4">
-            Contact Us
-          </h3> */}
-
             <div className="flex items-center gap-3">
-              {/* <MapPin className="w-5 h-5 text-[#cc9f53]" /> */}
               <span className="font-extralight text-[15px] text-white">
                 6 Koi Street, Osu. Accra, Ghana
               </span>
             </div>
-
             <div className="flex items-center gap-3">
-              {/* <Phone className="w-5 h-5 text-[#cc9f53]" /> */}
-              <a
-                href="tel: +233030 398 2318"
-                className="font-extralight text-[15px] text-white hover:text-inherit hover:no-underline"
-              >
-                030 398 2318
-                {/* +233-505-099427 | +1-973-204-5796 */}
-              </a>
+              <FooterLink href="tel:+233030 398 2318">030 398 2318</FooterLink>
             </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center gap-3">
-                {/* <Mail className="w-5 h-5 text-[#cc9f53]" /> */}
-                <a
-                  href="mailto:connect@africanaspirations.com"
-                  className="font-extralight text-[15px] text-white transition hover:text-[#007426]"
-                >
-                  connect@africanaspirations.com
-                </a>
-              </div>
+            <div className="flex items-center gap-3">
+              <FooterLink href="mailto:connect@africanaspirations.com">
+                connect@africanaspirations.com
+              </FooterLink>
             </div>
           </div>
         </div>
-        {/* Links */}
-        <div>
-          <Link
-            href="/our-specialties"
-            className="group relative mb-4 inline-block font-bold text-[15px] text-white hover:text-[#007426]"
-          >
-            Stakeholders
-            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
-          </Link>
-          <ul className="space-y-4">
-            {[
-              // { name: "Insurance", href: "/insurance" },
-              // {
-              //   name: "Acturial & Financial Model",
-              //   href: "/acturial-and-financial-modeling#actuarial",
-              // },
-              // {
-              //   name: "Investment & Asset-Liability Management",
-              //   href: "/investment-and-asset-liability-management",
-              // },
-              // { name: "Risk Management", href: "/risk-management" },
-              // { name: "Compliance", href: "/compliance" },
 
+        {/* Stakeholders */}
+        <div>
+          <FooterLink href="/our-specialties" bold className="mb-4">
+            Stakeholders
+          </FooterLink>
+          <ul className="mt-4 space-y-4">
+            {[
               { name: "For Sellers", href: "/business-brokerage" },
-              {
-                name: "For Buyers",
-                href: "/business-brokerage",
-              },
-              {
-                name: "For Investors",
-                href: "/investment-and-asset-liability-management",
-              },
-              {
-                name: "Business Advisors",
-                href: "/investment-and-asset-liability-management",
-              },
+              { name: "For Buyers", href: "/business-brokerage" },
+              { name: "For Investors", href: "/investment-and-asset-liability-management" },
+              { name: "Business Advisors", href: "/investment-and-asset-liability-management" },
             ].map((link) => (
               <li key={link.name} className="text-[15px]">
-                <Link
-                  href={link?.href}
-                  className="group relative inline-block font-extralight text-[15px] text-white transition-colors duration-300 hover:text-[#007426]"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
-                </Link>
+                <FooterLink href={link.href}>{link.name}</FooterLink>
               </li>
             ))}
           </ul>
         </div>
+
+        {/* Our products */}
         <div>
-          <Link
-            href="#footer"
-            className="group relative mb-4 inline-block font-bold text-[15px] text-white hover:text-[#007426]"
-          >
+          <FooterLink href="#footer" bold className="mb-4">
             Our products
-            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
-          </Link>
-          <ul className="space-y-4">
+          </FooterLink>
+          <ul className="mt-4 space-y-4">
             {[
-              {
-                name: "Valuation Report",
-                href: "/business-brokerage#business-valuation",
-              },
+              { name: "Valuation Report", href: "/business-brokerage#business-valuation" },
               { name: "Pitch Books", href: "/business-brokerage#pitch-books" },
-              {
-                name: "CIM",
-                // href: "/about",
-              },
-              {
-                name: "Industry Research Report",
-                href: "/business-brokerage#research-report",
-              },
-              // { name: "Media & insights", href: "/media-and-insights" },
-              // { name: "Refer a Business" },
-              // { name: "Contact Us" },
+              { name: "CIM" },
+              { name: "Industry Research Report", href: "/business-brokerage#research-report" },
             ].map((link) => (
               <li key={link.name}>
-                <a
-                  href={link?.href}
-                  className="group relative inline-block font-extralight text-[15px] text-white transition-colors duration-300 hover:text-[#007426]"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
-                </a>
+                <FooterLink href={link.href}>{link.name}</FooterLink>
               </li>
             ))}
           </ul>
         </div>
+
+        {/* Other Links */}
         <div>
-          <Link
-            href="#footer"
-            className="group relative mb-4 inline-block font-bold text-[15px] text-white hover:text-[#007426]"
-          >
+          <FooterLink href="#footer" bold className="mb-4">
             Other Links
-            <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
-          </Link>
-          <ul className="space-y-4">
+          </FooterLink>
+          <ul className="mt-4 space-y-4">
             {[
-              {
-                name: "TBA Ghana",
-                href: "https://tworld.com.gh/",
-              },
+              { name: "TBA Ghana", href: "https://tworld.com.gh/", external: true },
               { name: "Services Providers" },
               { name: "Refer a business" },
             ].map((link) => (
               <li key={link.name}>
-                <a
-                  target="_blank"
-                  href={link?.href}
-                  className="group relative inline-block font-extralight text-[15px] text-white transition-colors duration-300 hover:text-[#007426]"
-                  rel="noopener"
-                >
+                <FooterLink href={link.href} external={link.external}>
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#007426] transition-all duration-300 ease-out group-hover:w-full"></span>
-                </a>
+                </FooterLink>
               </li>
             ))}
           </ul>
         </div>
+
         {/* Social Icons */}
         <div className="col-span-2 flex flex-col items-start gap-5 sm:col-span-1 md:justify-self-end">
           <a
@@ -180,14 +99,9 @@ const Footer = () => {
             className="footer-svg transition"
             rel="noopener"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-            >
-              <title>linkedin_line</title>
-              <g id="linkedin_line" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+              <title>linkedin</title>
+              <g fill="none">
                 <path d="M24 0v24H0V0zM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01z" />
                 <path
                   className="icon-path"
@@ -203,14 +117,9 @@ const Footer = () => {
             className="footer-svg transition"
             rel="noopener"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-            >
-              <title>facebook_fill</title>
-              <g id="facebook_fill" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+              <title>facebook</title>
+              <g fill="none">
                 <path d="M24 0v24H0V0zM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01z" />
                 <path
                   className="icon-path"
@@ -226,14 +135,9 @@ const Footer = () => {
             className="footer-svg transition"
             rel="noopener"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-            >
-              <title>instagram_line</title>
-              <g id="instagram_line" fill="none" fillRule="evenodd">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+              <title>instagram</title>
+              <g fill="none" fillRule="evenodd">
                 <path d="M24 0v24H0V0zM12.593 23.258l-.011.002-.071.035-.02.004-.014-.004-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113-.013.002-.185.093-.01.01-.003.011.018.43.005.012.008.007.201.093c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.004-.011.017-.43-.003-.012-.01-.01z" />
                 <path
                   className="icon-path"
@@ -249,14 +153,9 @@ const Footer = () => {
             className="footer-svg transition"
             rel="noopener"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-            >
-              <title>social_x_line</title>
-              <g id="social_x_line" fill="none" fillRule="evenodd">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+              <title>x (twitter)</title>
+              <g fill="none" fillRule="evenodd">
                 <path d="M24 0v24H0V0zM12.594 23.258l-.012.002-.071.035-.02.004-.014-.004-.071-.036c-.01-.003-.019 0-.024.006l-.004.01-.017.428.005.02.01.013.104.074.015.004.012-.004.104-.074.012-.016.004-.017-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113-.014.002-.184.093-.01.01-.003.011.018.43.005.012.008.008.201.092c.012.004.023 0 .029-.008l.004-.014-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014-.034.614c0 .012.007.02.017.024l.015-.002.201-.093.01-.008.003-.011.018-.43-.003-.012-.01-.01z" />
                 <path
                   fill="#ffff"
@@ -268,26 +167,15 @@ const Footer = () => {
           </a>
         </div>
       </div>
+
       <div className="mx-auto flex max-w-[90rem] flex-col items-start justify-between gap-3 border-white/10 border-t px-4 pt-6 pb-8 md:flex-row md:items-center md:gap-0 md:px-8">
-        <span
-          className="font-normal text-[15px] text-white"
-          style={{ fontFamily: "Inter" }}
-        >
+        <span className="font-normal text-[15px] text-white" style={{ fontFamily: "Inter" }}>
           Copyright © {new Date().getFullYear()}. African Aspirations.
         </span>
         <div className="flex items-center gap-6">
-          <span
-            className="font-normal text-[#81878A] text-[15px]"
-            style={{ fontFamily: "Inter" }}
-          >
-            Privacy Policy
-          </span>
-          <span
-            className="font-normal text-[#81878A] text-[15px]"
-            style={{ fontFamily: "Inter" }}
-          >
-            Terms of Use
-          </span>
+          <FooterLink>Privacy Policy</FooterLink>
+          <FooterLink>Terms of Use</FooterLink>
+          <FooterLink href="/auth/admin" className="opacity-40 hover:opacity-100">Admin</FooterLink>
         </div>
       </div>
     </footer>

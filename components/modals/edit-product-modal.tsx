@@ -2,9 +2,8 @@
 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -26,7 +25,7 @@ import { useModal } from "@/hooks/use-modal-store";
 import ImageUpload from "../image-upload";
 
 export const EditProductModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, type, data } = useModal();
   const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [nameInput, setNameInput] = useState("");
@@ -54,7 +53,6 @@ export const EditProductModal = () => {
 
   const isModalOpen = isOpen && type === "editProduct";
 
-  const router = useRouter();
 
   // edit a product
   const submit = async (id: any) => {
@@ -79,7 +77,7 @@ export const EditProductModal = () => {
 
       toast.success("Product updated successfully!!");
       handleClose();
-      router.refresh();
+      data?.onSuccess?.();
     } catch (error: any) {
       console.error(error.response.data);
       toast.error(error.response.data);
@@ -134,7 +132,6 @@ export const EditProductModal = () => {
 
   return (
     <>
-      <Toaster position="top-center" />
       <Dialog open={isModalOpen} onOpenChange={handleClose}>
         <DialogContent className="overflow-hidden bg-white p-0 text-black">
           <DialogHeader className="px-6 pt-8">

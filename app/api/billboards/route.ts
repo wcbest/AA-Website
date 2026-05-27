@@ -1,18 +1,18 @@
+import { desc } from "drizzle-orm";
 import { NextResponse } from "next/server";
-import { db } from "@/utils/turso";
+import { db } from "@/db";
+import { billboards } from "@/db/schema";
 
-export const GET = async (_req: Request, _res: Response) => {
+export const GET = async () => {
   try {
-    const result = await db.execute(
-      "SELECT * FROM billboards ORDER BY created_at DESC",
-    );
-    return NextResponse.json(result.rows, { status: 200 });
+    const rows = await db.select().from(billboards).orderBy(desc(billboards.createdAt));
+    return NextResponse.json(rows, { status: 200 });
   } catch (_err) {
     return new NextResponse("Server Error", { status: 500 });
   }
 };
 
-export const POST = async (req: Request, _res: Response) => {
+export const POST = async (req: Request) => {
   const { label, imageUrl } = await req.json();
 
   if (!label) {
@@ -25,17 +25,8 @@ export const POST = async (req: Request, _res: Response) => {
 
   try {
     const id = crypto.randomUUID();
-    await db.execute({
-      sql: "INSERT INTO billboards (id, label, image_url) VALUES (?, ?, ?)",
-      args: [id, label, imageUrl],
-    });
-
-    const result = await db.execute({
-      sql: "SELECT * FROM billboards WHERE id = ?",
-      args: [id],
-    });
-
-    return NextResponse.json(result.rows[0], { status: 200 });
+    const [row] = await db.insert(billboards).values({ id, label, imageUrl }).returning();
+    return NextResponse.json(row, { status: 200 });
   } catch (error) {
     console.log("[BILLBOARD_POST]", error);
     return new NextResponse("Internal error", { status: 500 });

@@ -2,9 +2,8 @@
 
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,8 +17,7 @@ import { useModal } from "@/hooks/use-modal-store";
 import ImageUpload from "../image-upload";
 
 export const CreateBillBoardModal = () => {
-  const { isOpen, onClose, type } = useModal();
-  const router = useRouter();
+  const { isOpen, onClose, type, data } = useModal();
   const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [textInput, setTextInput] = useState("");
@@ -30,7 +28,6 @@ export const CreateBillBoardModal = () => {
 
   const isModalOpen = isOpen && type === "createBillboard";
 
-  const _router = useRouter();
 
   const submit = async () => {
     try {
@@ -53,7 +50,7 @@ export const CreateBillBoardModal = () => {
       setTextInput("");
       setFile("");
       handleClose();
-      router.refresh();
+      data?.onSuccess?.();
     } catch (error: any) {
       console.error(error.response.data);
       toast.error(error.response.data);
@@ -68,7 +65,6 @@ export const CreateBillBoardModal = () => {
 
   return (
     <>
-      <Toaster position="top-center" />
       <Dialog open={isModalOpen} onOpenChange={handleClose}>
         <DialogContent className="overflow-hidden bg-white p-0 text-black">
           <DialogHeader className="px-6 pt-8">

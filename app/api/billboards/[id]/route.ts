@@ -1,42 +1,26 @@
+import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
-import { db } from "@/utils/turso";
+import { db } from "@/db";
+import { billboards } from "@/db/schema";
 
-export async function GET(
-  _req: Request,
-  { params }: { params: { id: string } },
-) {
+export async function GET(_req: Request, { params }: { params: { id: string } }) {
   const { id } = params;
 
-  if (!id) {
-    return new NextResponse("billboard id is required", { status: 400 });
-  }
-
   try {
-    const result = await db.execute({
-      sql: "SELECT * FROM billboards WHERE id = ?",
-      args: [id],
-    });
+    const row = await db.select().from(billboards).where(eq(billboards.id, id)).get();
 
-    if (result.rows.length === 0) {
+    if (!row) {
       return new NextResponse("Billboard not found", { status: 404 });
     }
 
-    return NextResponse.json(result.rows[0], { status: 200 });
+    return NextResponse.json(row, { status: 200 });
   } catch (_err) {
     return new NextResponse("Server Error", { status: 500 });
   }
 }
 
-export async function PATCH(
-  req: Request,
-  { params }: { params: { id: string } },
-) {
+export async function PATCH(req: Request, { params }: { params: { id: string } }) {
   const { id } = params;
-
-  if (!id) {
-    return new NextResponse("billboard id is required", { status: 400 });
-  }
-
   const { label, imageUrl } = await req.json();
 
   if (!label) {
@@ -48,39 +32,24 @@ export async function PATCH(
   }
 
   try {
-    await db.execute({
-      sql: "UPDATE billboards SET label = ?, image_url = ? WHERE id = ?",
-      args: [label, imageUrl, id],
-    });
+    const [row] = await db
+      .update(billboards)
+      .set({ label, imageUrl })
+      .where(eq(billboards.id, id))
+      .returning();
 
-    const result = await db.execute({
-      sql: "SELECT * FROM billboards WHERE id = ?",
-      args: [id],
-    });
-
-    return NextResponse.json(result.rows[0]);
+    return NextResponse.json(row);
   } catch (error) {
     console.log("[BILLBOARD_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
 
-export async function DELETE(
-  _req: Request,
-  { params }: { params: { id: string } },
-) {
+export async function DELETE(_req: Request, { params }: { params: { id: string } }) {
   const { id } = params;
 
-  if (!id) {
-    return new NextResponse("billboard id is required", { status: 400 });
-  }
-
   try {
-    await db.execute({
-      sql: "DELETE FROM billboards WHERE id = ?",
-      args: [id],
-    });
-
+    await db.delete(billboards).where(eq(billboards.id, id));
     return new NextResponse("billboard has been deleted", { status: 200 });
   } catch (error) {
     console.log("[BILLBOARD_DELETE]", error);
