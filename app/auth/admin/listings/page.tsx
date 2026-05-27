@@ -82,6 +82,7 @@ const ListingsPage = () => {
       setListings((prev) =>
         prev.map((l) => (l.id === id ? { ...l, published: current ? 0 : 1 } : l)),
       );
+      toast.success(current ? "Listing unpublished" : "Listing published");
     } catch {
       toast.error("Failed to update publish state");
     }

@@ -18,10 +18,14 @@ export const EditListingModal = () => {
   const listing = data?.listing;
 
   const onSubmit = async (values: ListingFormValues) => {
-    await axios.put(`/api/listings/${listing.id}`, values);
-    toast.success("Listing updated successfully");
-    onClose();
-    data?.onSuccess?.();
+    try {
+      await axios.put(`/api/listings/${listing.id}`, values);
+      toast.success("Listing updated successfully");
+      onClose();
+      data?.onSuccess?.();
+    } catch {
+      toast.error("Failed to update listing");
+    }
   };
 
   if (!listing) return null;

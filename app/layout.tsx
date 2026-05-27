@@ -1,6 +1,7 @@
 import { Analytics } from "@vercel/analytics/react";
 import { Agentation } from "agentation";
 import type { Metadata } from "next";
+import { Toaster } from "sonner";
 import { ModalProvider } from "@/components/providers/modal-provider";
 import { cn } from "@/lib/utils";
 import "./globals.css";
@@ -25,6 +26,7 @@ export default function RootLayout({
           <Agentation endpoint="http://localhost:4747" />
         )}
         <ModalProvider />
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

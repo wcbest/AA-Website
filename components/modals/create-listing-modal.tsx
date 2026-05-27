@@ -17,10 +17,14 @@ export const CreateListingModal = () => {
   const isModalOpen = isOpen && type === "createListing";
 
   const onSubmit = async (values: ListingFormValues) => {
-    await axios.post("/api/listings", values);
-    toast.success("Listing created successfully");
-    onClose();
-    data?.onSuccess?.();
+    try {
+      await axios.post("/api/listings", values);
+      toast.success("Listing created successfully");
+      onClose();
+      data?.onSuccess?.();
+    } catch {
+      toast.error("Failed to create listing");
+    }
   };
 
   return (
