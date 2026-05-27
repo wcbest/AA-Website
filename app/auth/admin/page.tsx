@@ -95,7 +95,8 @@ const Products = () => {
 
   useEffect(() => {
     getProducts();
-  }, [getProducts]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex-col">
