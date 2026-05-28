@@ -35,3 +35,9 @@ Thumbs.db
 # Claude
 CLAUDE.md
 .claude/
+
+# TypeScript
+tsconfig.tsbuildinfo
+
+# Logs
+*.log
